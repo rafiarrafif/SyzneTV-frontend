@@ -1,3 +1,6 @@
+import { metadata } from "./metadata";
+export { metadata };
+
 import React from "react";
 
 const page = () => {
