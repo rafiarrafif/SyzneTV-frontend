@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "commit": "npm x git-cz",
+    "commit": "bunx git-cz",
     "push": "bun ./scripts/git-multipush.ts"
   },
   "dependencies": {
