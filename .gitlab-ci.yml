@@ -1,0 +1,14 @@
+image: oven/bun:latest
+
+stages:
+  - test
+
+validate-react:
+  stage: test
+  script:
+    - echo "Install dependencies..."
+    - bun install
+    - echo "Menjalankan lint..."
+    - bun run lint
+    - echo "Menjalankan build..."
+    - bun run build
