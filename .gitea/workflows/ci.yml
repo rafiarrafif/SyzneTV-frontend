@@ -12,6 +12,9 @@ jobs:
     container:
       image: oven/bun:latest
     steps:
+      - name: Clone private repo
+        run: git clone "$GITEA_REPOSITORY_CLONE_URL" .
+
       - name: Install dependencies
         run: bun install
 
