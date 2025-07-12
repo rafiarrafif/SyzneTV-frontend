@@ -8,7 +8,7 @@ on:
 
 jobs:
   build-testing:
-    runs-on: docker
+    runs-on: ubuntu-22.04
     container:
       image: oven/bun:latest
     steps:
