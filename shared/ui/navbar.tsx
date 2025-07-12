@@ -11,6 +11,7 @@ import {
   NavbarMenuItem,
   NavbarMenuToggle,
 } from "@heroui/react";
+import { usePathname } from "next/navigation";
 import React, { useState } from "react";
 
 export const AcmeLogo = () => {
@@ -27,6 +28,7 @@ export const AcmeLogo = () => {
 };
 
 const NavbarUI = () => {
+  const pathNameNow = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navbarItems = [
@@ -35,16 +37,20 @@ const NavbarUI = () => {
       route: "/",
     },
     {
-      title: "Featured",
-      route: "/featured",
+      title: "Explore",
+      route: "/explore",
     },
     {
-      title: "Season",
-      route: "/season",
+      title: "Trending",
+      route: "/trending",
     },
     {
       title: "Genres",
-      route: "/genres",
+      route: "/genre",
+    },
+    {
+      title: "Schedule",
+      route: "/schedule",
     },
   ];
 
@@ -62,26 +68,20 @@ const NavbarUI = () => {
       </NavbarContent>
 
       <NavbarContent className="hidden sm:flex gap-6" justify="center">
-        <NavbarItem>
-          <Link color="foreground" href="#">
-            Home
-          </Link>
-        </NavbarItem>
-        <NavbarItem isActive>
-          <Link aria-current="page" href="#">
-            Explore
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link color="foreground" href="#">
-            Trending
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link color="foreground" href="#">
-            Schedule
-          </Link>
-        </NavbarItem>
+        {navbarItems.map((item, index) => {
+          const isActive = item.route === pathNameNow;
+
+          return (
+            <NavbarItem key={index} isActive={isActive}>
+              <Link
+                color={isActive ? "primary" : "foreground"}
+                href={isActive ? "" : item.route}
+              >
+                {item.title}
+              </Link>
+            </NavbarItem>
+          );
+        })}
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem className="hidden lg:flex">
