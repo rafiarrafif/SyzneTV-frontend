@@ -12,6 +12,9 @@ jobs:
     container:
       image: oven/bun:latest
     steps:
+      - name: Install Git
+        run: apt update && apt install -y git
+
       - name: Clone private repo
         run: git clone "$GITEA_REPOSITORY_CLONE_URL" .
 
