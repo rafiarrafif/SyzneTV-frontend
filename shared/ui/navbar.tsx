@@ -1,5 +1,6 @@
 "use client";
 
+import V from "next/link";
 import {
   Button,
   Link,
@@ -82,6 +83,12 @@ const NavbarUI = () => {
             </NavbarItem>
           );
         })}
+        <NavbarItem>
+          <V href="/">Home</V>
+        </NavbarItem>
+        <NavbarItem>
+          <V href="/explore">Explore</V>
+        </NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem className="hidden lg:flex">
