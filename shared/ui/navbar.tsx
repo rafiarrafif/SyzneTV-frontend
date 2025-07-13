@@ -1,6 +1,5 @@
 "use client";
 
-import V from "next/link";
 import {
   Button,
   Link,
@@ -12,8 +11,9 @@ import {
   NavbarMenuItem,
   NavbarMenuToggle,
 } from "@heroui/react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import React, { useState } from "react";
+import { delayButtonClick } from "../lib/delayButtonClick";
 
 export const AcmeLogo = () => {
   return (
@@ -29,7 +29,9 @@ export const AcmeLogo = () => {
 };
 
 const NavbarUI = () => {
+  const router = useRouter();
   const pathNameNow = usePathname();
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navbarItems = [
@@ -86,17 +88,16 @@ const NavbarUI = () => {
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem className="hidden lg:flex">
-          <Link href="#" className="font-medium">
+          <Link href="/login" className="font-medium">
             Login
           </Link>
         </NavbarItem>
         <NavbarItem>
           <Button
-            as={Link}
             color="primary"
-            href="#"
             variant="solid"
             radius="sm"
+            onPress={() => delayButtonClick(router, "/signup")}
           >
             Sign Up
           </Button>
