@@ -97,7 +97,8 @@ const NavbarUI = () => {
             color="primary"
             variant="solid"
             radius="sm"
-            onPress={() => delayButtonClick(router, "/signup")}
+            as={Link}
+            href="/sign-up"
           >
             Sign Up
           </Button>
