@@ -8,7 +8,7 @@ import { routes } from "@/shared/config/routes";
 
 const LoginCard = () => {
   return (
-    <Card className="px-6 sm:px-8 py-12 sm:py-8 h-screen sm:h-auto w-screen sm:w-auto">
+    <Card className="px-6 sm:px-8 py-12 sm:py-8 h-screen sm:h-auto w-screen sm:w-[460px]">
       <h1 className="text-3xl font-light text-center">Welcome Back</h1>
 
       {/* Email form */}

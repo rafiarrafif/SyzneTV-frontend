@@ -6,7 +6,7 @@ const EmailForm = () => {
     // Form component to handle email input
     <Form className="mt-12 sm:mt-8">
       <Input
-        className="w-full sm:w-[420px] "
+        className="w-full "
         label="Email"
         type="email"
         variant="bordered"
