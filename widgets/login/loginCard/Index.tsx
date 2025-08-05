@@ -4,6 +4,7 @@ import { Card, Divider, Link } from "@heroui/react";
 import React from "react";
 import EmailForm from "./EmailForm";
 import ContinueWithProviders from "./ContinueWithProviders";
+import { routes } from "@/shared/config/routes";
 
 const LoginCard = () => {
   return (
@@ -16,7 +17,7 @@ const LoginCard = () => {
       {/* Sign up link */}
       <p className="text-center text-neutral-300 text-sm font-light mt-5">
         Don't have an account?{" "}
-        <Link className="text-sm font-medium" href="/sign-up">
+        <Link className="text-sm font-medium" href={routes.signup}>
           Sign Up
         </Link>
       </p>

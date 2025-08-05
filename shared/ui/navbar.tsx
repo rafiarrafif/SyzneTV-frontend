@@ -14,6 +14,7 @@ import {
 import { usePathname, useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { delayButtonClick } from "../lib/delayButtonClick";
+import { routes } from "../config/routes";
 
 export const AcmeLogo = () => {
   return (
@@ -29,7 +30,6 @@ export const AcmeLogo = () => {
 };
 
 const NavbarUI = () => {
-  const router = useRouter();
   const pathNameNow = usePathname();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -37,23 +37,23 @@ const NavbarUI = () => {
   const navbarItems = [
     {
       title: "Home",
-      route: "/",
+      route: routes.home,
     },
     {
       title: "Explore",
-      route: "/explore",
+      route: routes.explore,
     },
     {
       title: "Trending",
-      route: "/trending",
+      route: routes.trending,
     },
     {
       title: "Genres",
-      route: "/genre",
+      route: routes.genres,
     },
     {
       title: "Schedule",
-      route: "/schedule",
+      route: routes.schedule,
     },
   ];
 
@@ -88,7 +88,7 @@ const NavbarUI = () => {
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem className="hidden lg:flex">
-          <Link href="/login" className="font-medium">
+          <Link href={routes.login} className="font-medium">
             Login
           </Link>
         </NavbarItem>
@@ -98,7 +98,7 @@ const NavbarUI = () => {
             variant="solid"
             radius="sm"
             as={Link}
-            href="/sign-up"
+            href={routes.signup}
           >
             Sign Up
           </Button>
