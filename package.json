@@ -7,8 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "commit": "bunx git-cz",
-    "push": "bun ./scripts/git-multipush.ts"
+    "git:commit": "bunx git-cz",
+    "git:push": "bun ./scripts/git-multipush.ts",
+    "env:publish": "bun ./scripts/create-env-example.ts"
   },
   "dependencies": {
     "@heroui/react": "^2.8.2",
