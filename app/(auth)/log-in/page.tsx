@@ -1,4 +1,4 @@
-import LoginCard from "@/widgets/login/loginCard/Index";
+import LoginCard from "@/widgets/authentication/login/LoginCard";
 import React from "react";
 
 const page = () => {

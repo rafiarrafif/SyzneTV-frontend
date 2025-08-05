@@ -1,24 +1,24 @@
 "use client";
 
 import { Card, Divider, Link } from "@heroui/react";
-import React from "react";
-import EmailForm from "./EmailForm";
-import ContinueWithProviders from "./ContinueWithProviders";
 import { routes } from "@/shared/config/routes";
+import React from "react";
+import ContinueWithProviders from "../ContinueWithProviders";
+import EmailForm from "@/features/signup/ui/EmailForm";
 
-const LoginCard = () => {
+const SignupCard = () => {
   return (
     <Card className="px-6 sm:px-8 py-12 sm:py-8 h-screen sm:h-auto w-screen sm:w-[460px]">
-      <h1 className="text-3xl font-light text-center">Welcome Back</h1>
+      <h1 className="text-3xl font-light text-center">Create an account</h1>
 
       {/* Email form */}
       <EmailForm />
 
-      {/* Sign up link */}
+      {/* Log in link */}
       <p className="text-center text-neutral-300 text-sm font-light mt-5">
-        Don't have an account?{" "}
-        <Link className="text-sm font-medium" href={routes.signup}>
-          Sign Up
+        Already have an account?{" "}
+        <Link className="text-sm font-medium" href={routes.login}>
+          Log in
         </Link>
       </p>
 
@@ -35,4 +35,4 @@ const LoginCard = () => {
   );
 };
 
-export default LoginCard;
+export default SignupCard;

@@ -20,9 +20,10 @@ const ContinueWithProviders = () => {
 
   return (
     <div className="w-full flex flex-col gap-2 mt-4">
-      {oAuthProviders.map((provider) => {
+      {oAuthProviders.map((provider, index) => {
         return (
           <Button
+            key={index}
             className="w-full hover:bg-neutral-800"
             variant="bordered"
             startContent={<Icon icon={provider.icon} />}
