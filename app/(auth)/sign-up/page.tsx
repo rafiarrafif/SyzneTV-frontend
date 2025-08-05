@@ -1,5 +1,12 @@
+import { buildMeta } from "@/shared/config/meta";
 import SignupCard from "@/widgets/authentication/signup/SignupCard";
 import React from "react";
+
+export const generateMetadata = () => {
+  return buildMeta({
+    title: "Sign in",
+  });
+};
 
 const page = () => {
   return (

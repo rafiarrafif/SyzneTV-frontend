@@ -1,5 +1,12 @@
+import { buildMeta } from "@/shared/config/meta";
 import LoginCard from "@/widgets/authentication/login/LoginCard";
 import React from "react";
+
+export const generateMetadata = () => {
+  return buildMeta({
+    title: "Log in",
+  });
+};
 
 const page = () => {
   return (
