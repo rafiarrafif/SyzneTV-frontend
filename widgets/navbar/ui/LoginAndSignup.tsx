@@ -5,12 +5,20 @@ import { Button, Link, NavbarItem } from "@heroui/react";
 import React from "react";
 
 const LoginAndSignup = () => {
+  const openLoginPopup = (e: any) => {
+    window.open(routes.login, "popup", "width=500,height=600");
+  };
   return (
     <>
       <NavbarItem className="hidden lg:flex">
-        <Link href={routes.login} className="font-medium">
+        <Button
+          color="primary"
+          variant="light"
+          className="font-medium"
+          onPress={openLoginPopup}
+        >
           Login
-        </Link>
+        </Button>
       </NavbarItem>
       <NavbarItem>
         <Button

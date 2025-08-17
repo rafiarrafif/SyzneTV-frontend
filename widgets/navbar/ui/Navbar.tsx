@@ -86,7 +86,7 @@ const NavbarUI = () => {
         })}
       </NavbarContent>
 
-      <NavbarContent justify="end">
+      <NavbarContent justify="end" className="gap-1">
         <LoginAndSignup />
       </NavbarContent>
 
