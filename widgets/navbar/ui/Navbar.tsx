@@ -1,7 +1,6 @@
 "use client";
 
 import {
-  Button,
   Link,
   Navbar,
   NavbarBrand,
@@ -11,10 +10,10 @@ import {
   NavbarMenuItem,
   NavbarMenuToggle,
 } from "@heroui/react";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import React, { useState } from "react";
-import { delayButtonClick } from "../lib/delayButtonClick";
-import { routes } from "../config/routes";
+import { routes } from "../../../shared/config/routes";
+import LoginAndSignup from "./LoginAndSignup";
 
 export const AcmeLogo = () => {
   return (
@@ -86,24 +85,11 @@ const NavbarUI = () => {
           );
         })}
       </NavbarContent>
+
       <NavbarContent justify="end">
-        <NavbarItem className="hidden lg:flex">
-          <Link href={routes.login} className="font-medium">
-            Login
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Button
-            color="primary"
-            variant="solid"
-            radius="sm"
-            as={Link}
-            href={routes.signup}
-          >
-            Sign Up
-          </Button>
-        </NavbarItem>
+        <LoginAndSignup />
       </NavbarContent>
+
       <NavbarMenu>
         {navbarItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
