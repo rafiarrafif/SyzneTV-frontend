@@ -8,6 +8,9 @@ const LoginAndSignup = () => {
   const openLoginPopup = (e: any) => {
     window.open(routes.login, "popup", "width=500,height=600");
   };
+  const openSignupPopup = (e: any) => {
+    window.open(routes.signup, "popup", "width=500,height=600");
+  };
   return (
     <>
       <NavbarItem className="hidden lg:flex">
@@ -25,8 +28,7 @@ const LoginAndSignup = () => {
           color="primary"
           variant="solid"
           radius="sm"
-          as={Link}
-          href={routes.signup}
+          onPress={openSignupPopup}
         >
           Sign Up
         </Button>
