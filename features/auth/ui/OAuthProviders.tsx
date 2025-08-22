@@ -1,8 +1,24 @@
+"use client";
+
 import { Button } from "@heroui/react";
 import { Icon } from "@iconify/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import getGoogleAuthUrl from "../lib/getGoogleAuthUrl";
 
 const OAuthProviders = () => {
+  const [UrlOauth, setUrlOauth] = useState("please wait...");
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await getGoogleAuthUrl(); // panggil server function
+        setUrlOauth(JSON.stringify(res));
+      } catch (err) {
+        console.error(err);
+      }
+    })();
+  }, []);
+
   // set to true if there are other providers coming soon
   const comingSoonProviders: boolean = true;
 
@@ -32,6 +48,8 @@ const OAuthProviders = () => {
           </Button>
         );
       })}
+
+      <h1>{UrlOauth}</h1>
 
       {comingSoonProviders && (
         <Button className="w-full" variant="ghost" isDisabled>

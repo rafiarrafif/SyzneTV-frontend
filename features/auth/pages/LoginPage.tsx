@@ -27,7 +27,7 @@ const LoginPage = () => {
 
   useEffect(() => {
     // Prevent opening devtools while in authentication page
-    disableDevtool();
+    // disableDevtool();
 
     /**
      * Check if the window has an opener (i.e., it was opened by another window)
