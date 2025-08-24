@@ -6,10 +6,15 @@ import React, { useEffect, useState } from "react";
 import getOauthProviderList from "../lib/getOauthProviderList";
 
 const OAuthProviders = () => {
+  // Set initial state for OAuth providers list
   const [oauthProvidersList, setOauthProvidersList] = useState<
     oauthProviders[]
   >([]);
 
+  /**
+   * Fetch the list of OAuth providers from backend API
+   * and update the state if OAuth providers list is available
+   */
   useEffect(() => {
     (async () => {
       try {
@@ -23,6 +28,7 @@ const OAuthProviders = () => {
 
   return (
     <div className="w-full flex flex-col gap-2 mt-4">
+      {/* Render OAuth provider buttons */}
       {oauthProvidersList.length > 0 ? (
         oauthProvidersList.map((provider, index) => {
           return (
