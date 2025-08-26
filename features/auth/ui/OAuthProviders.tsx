@@ -1,14 +1,18 @@
 "use client";
 
+import { OauthProviders } from "../types/oauthProvidersList";
+import { ResponseRequestOauthUrl } from "../types/responseRequestOauthUrl";
+
+import React, { useEffect, useState } from "react";
 import { Button } from "@heroui/react";
 import { Icon } from "@iconify/react";
-import React, { useEffect, useState } from "react";
 import getOauthProviderList from "../lib/getOauthProviderList";
+import requestOauthUrl from "../lib/requestOauthUrl";
 
 const OAuthProviders = () => {
   // Set initial state for OAuth providers list
   const [oauthProvidersList, setOauthProvidersList] = useState<
-    oauthProviders[]
+    OauthProviders[]
   >([]);
 
   /**
@@ -18,13 +22,28 @@ const OAuthProviders = () => {
   useEffect(() => {
     (async () => {
       try {
-        const res = (await getOauthProviderList()) as oauthProviders[];
+        const res = (await getOauthProviderList()) as OauthProviders[];
         setOauthProvidersList(res);
       } catch (err) {
         console.error(err);
       }
     })();
   }, []);
+
+  /**
+   * Start the authentication process using oAuth by sending the endpoint URL to the backend for processing.
+   *
+   * @param providerRequestEndpoint The request endpoint for the OAuth provider
+   */
+  const startOauthProcess = async (providerRequestEndpoint: string) => {
+    try {
+      (await requestOauthUrl(
+        providerRequestEndpoint
+      )) as ResponseRequestOauthUrl;
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   return (
     <div className="w-full flex flex-col gap-2 mt-4">
@@ -37,6 +56,7 @@ const OAuthProviders = () => {
               className="w-full hover:bg-neutral-800"
               variant="bordered"
               startContent={<Icon icon={provider.icon} />}
+              onPress={() => startOauthProcess(provider.req_endpoint)}
             >
               Continue with {provider.name}
             </Button>

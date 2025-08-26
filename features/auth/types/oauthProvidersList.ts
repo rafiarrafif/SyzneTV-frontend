@@ -1,4 +1,4 @@
-interface oauthProviders {
+export interface OauthProviders {
   name: string;
   icon: string;
   req_endpoint: string;
