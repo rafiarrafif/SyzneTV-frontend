@@ -1,3 +1,4 @@
+import OauthCallbackHandler from "@/features/oauth-callback/pages/callbackHandler";
 import React from "react";
 
 interface PageProps {
@@ -6,12 +7,7 @@ interface PageProps {
 }
 
 const page = ({ params, searchParams }: PageProps) => {
-  return (
-    <>
-      <h1>Nama provider: {params.provider}</h1>
-      <h1>Data provider: {JSON.stringify(searchParams)}</h1>
-    </>
-  );
+  return <OauthCallbackHandler />;
 };
 
 export default page;

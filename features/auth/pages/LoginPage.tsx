@@ -3,8 +3,8 @@
 import { redirect } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import Login from "@/features/auth/ui/Login";
-import SecurityCheckup from "@/features/auth/ui/SecurityCheckup";
-import SecurityCheckupFailed from "@/features/auth/ui/SecurityCheckupFailed";
+import SecurityCheckup from "@/shared/auth/ui/SecurityCheckup";
+import SecurityCheckupFailed from "@/shared/auth/ui/SecurityCheckupFailed";
 
 const LoginPage = () => {
   /**

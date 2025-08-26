@@ -4,10 +4,9 @@ import { redirect } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import SecurityCheckup from "@/shared/auth/ui/SecurityCheckup";
 import SecurityCheckupFailed from "@/shared/auth/ui/SecurityCheckupFailed";
-import disableDevtool from "disable-devtool";
-import Signup from "../ui/Signup";
+import LoadingProcess from "../ui/LoadingProcess";
 
-const SignupPage = () => {
+const OauthCallbackHandler = () => {
   /**
    * Create a lit component that will be used in popp, consisting of 3 component flows:
    * 1. When the user opens it, a browser environment check will be performed.
@@ -17,7 +16,7 @@ const SignupPage = () => {
   const componentFlowList = {
     securityCheckup: <SecurityCheckup />,
     securityCheckupFailed: <SecurityCheckupFailed />,
-    SecurityCheckupSuccessed: <Signup />,
+    proceedCallback: <LoadingProcess />,
   };
 
   // State to set the current page component
@@ -27,7 +26,7 @@ const SignupPage = () => {
 
   useEffect(() => {
     // Prevent opening devtools while in authentication page
-    disableDevtool();
+    // disableDevtool();
 
     /**
      * Check if the window has an opener (i.e., it was opened by another window)
@@ -35,7 +34,7 @@ const SignupPage = () => {
      * If it doesn't, the security checkup has failed and user will be redirected to the homepage.
      */
     if (window.opener) {
-      setComponentFlow(componentFlowList.SecurityCheckupSuccessed);
+      setComponentFlow(componentFlowList.proceedCallback);
     } else {
       setComponentFlow(componentFlowList.securityCheckupFailed);
 
@@ -54,4 +53,4 @@ const SignupPage = () => {
   );
 };
 
-export default SignupPage;
+export default OauthCallbackHandler;
