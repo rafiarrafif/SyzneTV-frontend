@@ -60,7 +60,7 @@ const OAuthProviders = () => {
               key={index}
               className="w-full hover:bg-neutral-800"
               variant="bordered"
-              startContent={<Icon icon={provider.icon} />}
+              startContent={<Icon className="w-4 h-4" icon={provider.icon} />}
               onPress={() => startOauthProcess(provider.req_endpoint)}
               isLoading={loadingButton}
             >
