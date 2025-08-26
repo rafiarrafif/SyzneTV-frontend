@@ -37,13 +37,14 @@ const OAuthProviders = () => {
    *
    * @param providerRequestEndpoint The request endpoint for the OAuth provider
    */
-  const startOauthProcess = async (providerRequestEndpoint: string) => {
+  const startOauthProcess = async (providerData: {
+    name: string;
+    endpoint: string;
+  }) => {
     try {
       setLoadingButton(true);
 
-      (await requestOauthUrl(
-        providerRequestEndpoint
-      )) as ResponseRequestOauthUrl;
+      (await requestOauthUrl(providerData)) as ResponseRequestOauthUrl;
     } catch (err) {
       setLoadingButton(false);
       console.error(err);
@@ -61,7 +62,12 @@ const OAuthProviders = () => {
               className="w-full hover:bg-neutral-800"
               variant="bordered"
               startContent={<Icon className="w-4 h-4" icon={provider.icon} />}
-              onPress={() => startOauthProcess(provider.req_endpoint)}
+              onPress={() =>
+                startOauthProcess({
+                  name: provider.name,
+                  endpoint: provider.req_endpoint,
+                })
+              }
               isLoading={loadingButton}
             >
               Continue with {provider.name}
