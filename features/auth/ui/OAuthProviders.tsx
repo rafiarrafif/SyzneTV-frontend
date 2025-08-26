@@ -30,6 +30,8 @@ const OAuthProviders = () => {
     })();
   }, []);
 
+  const [loadingButton, setLoadingButton] = useState(false);
+
   /**
    * Start the authentication process using oAuth by sending the endpoint URL to the backend for processing.
    *
@@ -37,10 +39,13 @@ const OAuthProviders = () => {
    */
   const startOauthProcess = async (providerRequestEndpoint: string) => {
     try {
+      setLoadingButton(true);
+
       (await requestOauthUrl(
         providerRequestEndpoint
       )) as ResponseRequestOauthUrl;
     } catch (err) {
+      setLoadingButton(false);
       console.error(err);
     }
   };
@@ -57,6 +62,7 @@ const OAuthProviders = () => {
               variant="bordered"
               startContent={<Icon icon={provider.icon} />}
               onPress={() => startOauthProcess(provider.req_endpoint)}
+              isLoading={loadingButton}
             >
               Continue with {provider.name}
             </Button>
