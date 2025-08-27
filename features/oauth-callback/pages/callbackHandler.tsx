@@ -1,12 +1,17 @@
 "use client";
 
+import { ParamProps } from "../types/ParamProps";
 import { redirect } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import SecurityCheckup from "@/shared/auth/ui/SecurityCheckup";
 import SecurityCheckupFailed from "@/shared/auth/ui/SecurityCheckupFailed";
 import LoadingProcess from "../ui/LoadingProcess";
 
-const OauthCallbackHandler = () => {
+const OauthCallbackHandler = ({
+  callbackData,
+}: {
+  callbackData: ParamProps;
+}) => {
   /**
    * Create a lit component that will be used in popp, consisting of 3 component flows:
    * 1. When the user opens it, a browser environment check will be performed.
@@ -16,7 +21,7 @@ const OauthCallbackHandler = () => {
   const componentFlowList = {
     securityCheckup: <SecurityCheckup />,
     securityCheckupFailed: <SecurityCheckupFailed />,
-    proceedCallback: <LoadingProcess />,
+    proceedCallback: <LoadingProcess callbackData={callbackData} />,
   };
 
   // State to set the current page component

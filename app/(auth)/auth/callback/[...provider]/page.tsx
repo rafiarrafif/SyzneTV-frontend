@@ -1,13 +1,9 @@
 import OauthCallbackHandler from "@/features/oauth-callback/pages/callbackHandler";
 import React from "react";
+import { ParamProps } from "@/features/oauth-callback/types/ParamProps";
 
-interface PageProps {
-  params: { provider: string[] };
-  searchParams: { [key: string]: string | string[] | undefined };
-}
-
-const page = ({ params, searchParams }: PageProps) => {
-  return <OauthCallbackHandler />;
+const page = ({ params, searchParams }: ParamProps) => {
+  return <OauthCallbackHandler callbackData={{ params, searchParams }} />;
 };
 
 export default page;
