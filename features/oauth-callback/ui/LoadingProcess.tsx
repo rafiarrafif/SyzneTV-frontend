@@ -3,8 +3,10 @@
 import { CircularProgress } from "@heroui/react";
 import React, { useEffect, useRef } from "react";
 import { SendCallbackToServer } from "../lib/sendCallbackToServer";
+import { useParams } from "next/navigation";
 
 const LoadingProcess = () => {
+  const params = useParams();
   const calledRef = useRef(false);
   useEffect(() => {
     if (calledRef.current) return;
@@ -12,7 +14,10 @@ const LoadingProcess = () => {
 
     (async () => {
       try {
-        await SendCallbackToServer(window.location.search);
+        await SendCallbackToServer(
+          window.location.search,
+          params.provider as string
+        );
         window.close();
       } catch (error) {
         console.log(error);
