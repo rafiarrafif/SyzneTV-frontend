@@ -8,4 +8,5 @@ export const api = ky.create({
   headers: {
     access_token: process.env.MAIN_BACKEND_API_KEY,
   },
+  retry: 0,
 });

@@ -1,4 +1,9 @@
 export interface ParamProps {
   params: { provider: string[] };
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams:
+    | string
+    | string[][]
+    | Record<string, string>
+    | URLSearchParams
+    | undefined;
 }

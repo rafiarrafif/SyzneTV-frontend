@@ -1,22 +1,21 @@
 "use client";
 
 import { CircularProgress } from "@heroui/react";
-import React, { useEffect } from "react";
-import { ParamProps } from "../types/ParamProps";
+import React, { useEffect, useRef } from "react";
 import { SendCallbackToServer } from "../lib/sendCallbackToServer";
 
-const LoadingProcess = ({ callbackData }: { callbackData: ParamProps }) => {
+const LoadingProcess = () => {
+  const calledRef = useRef(false);
   useEffect(() => {
+    if (calledRef.current) return;
+    calledRef.current = true;
+
     (async () => {
       try {
-        const response = await SendCallbackToServer(callbackData);
-        console.log(
-          `Callback data sent to server successfully: ${JSON.stringify(
-            response
-          )}`
-        );
+        await SendCallbackToServer(window.location.search);
+        window.close();
       } catch (error) {
-        console.error("Error during loading process:", error);
+        console.log(error);
       }
     })();
   }, []);
@@ -27,9 +26,6 @@ const LoadingProcess = ({ callbackData }: { callbackData: ParamProps }) => {
         <h1 className="text-lg text-neutral-200">Please wait...</h1>
         <p className="text-sm text-neutral-400">
           Your request is being processed
-        </p>
-        <p className="text-sm text-neutral-400">
-          {JSON.stringify(callbackData)}
         </p>
       </div>
     </div>
