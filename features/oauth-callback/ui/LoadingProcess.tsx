@@ -7,8 +7,10 @@ import { useParams } from "next/navigation";
 import { useRunOnce } from "@/shared/hooks/useRunOnce";
 
 const LoadingProcess = () => {
+  // Access the URL parameters
   const params = useParams();
 
+  // Forward the callback response to the backend server
   useRunOnce("forwardCallbackResponseToBackend", async () => {
     try {
       await SendCallbackToServer(
