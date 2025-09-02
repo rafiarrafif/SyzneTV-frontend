@@ -1,29 +1,25 @@
 "use client";
 
+import React from "react";
 import { CircularProgress } from "@heroui/react";
-import React, { useEffect, useRef } from "react";
 import { SendCallbackToServer } from "../lib/sendCallbackToServer";
 import { useParams } from "next/navigation";
+import { useRunOnce } from "@/shared/hooks/useRunOnce";
 
 const LoadingProcess = () => {
   const params = useParams();
-  const calledRef = useRef(false);
-  useEffect(() => {
-    if (calledRef.current) return;
-    calledRef.current = true;
 
-    (async () => {
-      try {
-        await SendCallbackToServer(
-          window.location.search,
-          params.provider as string
-        );
-        window.close();
-      } catch (error) {
-        console.log(error);
-      }
-    })();
-  }, []);
+  useRunOnce("forwardCallbackResponseToBackend", async () => {
+    try {
+      await SendCallbackToServer(
+        window.location.search,
+        params.provider as string
+      );
+      window.close();
+    } catch (error) {
+      console.log(error);
+    }
+  });
   return (
     <div className="w-full flex flex-col items-center text-center mt-[26vh]">
       <CircularProgress aria-label="Loading..." size="lg" />
