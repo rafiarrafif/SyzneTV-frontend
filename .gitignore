@@ -42,3 +42,5 @@ next-env.d.ts
 
 scripts/git-multipush.ts
 /app/debug/
+# Sentry Config File
+.env.sentry-build-plugin
