@@ -2,8 +2,12 @@
 import { api } from "@/shared/api/connector";
 
 const getOauthProviderList = async () => {
-  const res = await api.get(`auth/providers`);
-  return res.json();
+  try {
+    const res = await api.get(`auth/providers`);
+    return res.json();
+  } catch (error) {
+    throw new Error("Failed to fetch OAuth providers", { cause: error });
+  }
 };
 
 export default getOauthProviderList;
