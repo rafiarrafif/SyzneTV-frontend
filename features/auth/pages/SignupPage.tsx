@@ -4,7 +4,6 @@ import { redirect } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import SecurityCheckup from "@/shared/auth/ui/SecurityCheckup";
 import SecurityCheckupFailed from "@/shared/auth/ui/SecurityCheckupFailed";
-import disableDevtool from "disable-devtool";
 import Signup from "../ui/Signup";
 
 const SignupPage = () => {
@@ -26,9 +25,6 @@ const SignupPage = () => {
   );
 
   useEffect(() => {
-    // Prevent opening devtools while in authentication page
-    disableDevtool();
-
     /**
      * Check if the window has an opener (i.e., it was opened by another window)
      * If it does, the security checkup has passed.
