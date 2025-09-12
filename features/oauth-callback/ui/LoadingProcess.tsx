@@ -1,10 +1,11 @@
 "use client";
 
 import React from "react";
-import { CircularProgress } from "@heroui/react";
+import { addToast, Button, CircularProgress, Link } from "@heroui/react";
 import { SendCallbackToServer } from "../lib/sendCallbackToServer";
 import { useParams } from "next/navigation";
 import { useRunOnce } from "@/shared/hooks/useRunOnce";
+import { routes } from "@/shared/config/routes";
 
 const LoadingProcess = () => {
   // Access the URL parameters
@@ -20,6 +21,21 @@ const LoadingProcess = () => {
       window.close();
     } catch (error) {
       console.log(error);
+      addToast({
+        title: "Oops, lost connection!",
+        description: "Check your internet and try again",
+        color: "danger",
+        timeout: 0,
+        endContent: (
+          <Button
+            size="sm"
+            variant="flat"
+            onPress={() => (window.location.href = routes.login)}
+          >
+            Reload
+          </Button>
+        ),
+      });
     }
   });
   return (
