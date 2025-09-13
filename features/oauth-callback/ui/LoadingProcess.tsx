@@ -14,15 +14,34 @@ const LoadingProcess = () => {
   // Forward the callback response to the backend server
   useRunOnce("forwardCallbackResponseToBackend", async () => {
     try {
-      await SendCallbackToServer(
+      const response = await SendCallbackToServer(
         window.location.search,
         params.provider as string
       );
-      window.close();
+
+      if (response.success) {
+        window.close();
+      } else {
+        addToast({
+          title: "😬 Oops, there's a problem!",
+          description: response.text.message,
+          color: "danger",
+          timeout: 0,
+          endContent: (
+            <Button
+              size="sm"
+              variant="flat"
+              onPress={() => (window.location.href = routes.login)}
+            >
+              Try again
+            </Button>
+          ),
+        });
+      }
     } catch (error) {
       console.log(error);
       addToast({
-        title: "Oops, lost connection!",
+        title: "😵‍💫 Oops, lost connection!",
         description: "Check your internet and try again",
         color: "danger",
         timeout: 0,

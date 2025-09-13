@@ -1,5 +1,5 @@
 "use server";
-import { api } from "@/shared/api/connector";
+import { api } from "@/shared/lib/ky/connector";
 
 const getOauthProviderList = async () => {
   try {

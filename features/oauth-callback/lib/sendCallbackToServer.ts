@@ -1,5 +1,14 @@
 "use server";
-import { api } from "@/shared/api/connector";
+import { api } from "@/shared/lib/ky/connector";
+import { apiErrorHandler } from "@/shared/lib/ky/errorHandler";
+import { HTTPError } from "ky";
+
+interface SendCallbackResponse {
+  success: boolean;
+  status: number;
+  text: { message: string };
+  data?: any;
+}
 
 /**
  * @function SendCallbackToServer
@@ -52,7 +61,10 @@ import { api } from "@/shared/api/connector";
  * - The callback URI is automatically constructed using the APP_DOMAIN environment variable.
  * - Ensure APP_DOMAIN is properly configured in your environment variables.
  */
-export const SendCallbackToServer = async (data: string, provider: string) => {
+export const SendCallbackToServer = async (
+  data: string,
+  provider: string
+): Promise<SendCallbackResponse> => {
   // Construct the backend and frontend handler URLs
   const backendHandlerUrl = `auth/${provider}/callback/`;
   const frontendHandlerUrl = `${process.env
@@ -66,8 +78,13 @@ export const SendCallbackToServer = async (data: string, provider: string) => {
 
     // Parse the JSON response from the backend and return the result
     const result = await response.json();
-    return result;
+    return {
+      success: true,
+      status: response.status,
+      text: { message: "Callback processed successfully" },
+      data: result,
+    };
   } catch (error) {
-    throw error;
+    return apiErrorHandler(error);
   }
 };

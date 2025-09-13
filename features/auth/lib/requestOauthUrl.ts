@@ -1,6 +1,6 @@
 "use server";
 
-import { api } from "@/shared/api/connector";
+import { api } from "@/shared/lib/ky/connector";
 import { redirect } from "next/navigation";
 import { ResponseRequestOauthUrl } from "../types/responseRequestOauthUrl";
 
