@@ -1,14 +1,20 @@
 image: oven/bun:latest
 
 stages:
-  - test
+  - lint
+  - build
 
-validate-react:
-  stage: test
+before_script:
+  - curl -fsSL https://bun.sh/install | bash
+  - export PATH="$HOME/.bun/bin:$PATH"
+  - bun install
+
+lint:
+  stage: lint
   script:
-    - echo "Install dependencies..."
-    - bun install
-    - echo "Menjalankan lint..."
     - bun run lint
-    - echo "Menjalankan build..."
+
+build:
+  stage: build
+  script:
     - bun run build
