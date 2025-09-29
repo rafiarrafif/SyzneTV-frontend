@@ -5,11 +5,8 @@ import { Button, Link, NavbarItem } from "@heroui/react";
 import React from "react";
 
 const LoginAndSignup = () => {
-  const openLoginPopup = (e: any) => {
-    window.open(routes.login, "popup", "width=500,height=600");
-  };
-  const openSignupPopup = (e: any) => {
-    window.open(routes.signup, "popup", "width=500,height=600");
+  const openPopupWindow = (href: string) => {
+    window.open(href, "popup", "width=500,height=600");
   };
   return (
     <>
@@ -18,7 +15,7 @@ const LoginAndSignup = () => {
           color="primary"
           variant="light"
           className="font-medium"
-          onPress={openLoginPopup}
+          onPress={() => openPopupWindow(routes.login)}
         >
           Login
         </Button>
@@ -28,7 +25,7 @@ const LoginAndSignup = () => {
           color="primary"
           variant="solid"
           radius="sm"
-          onPress={openSignupPopup}
+          onPress={() => openPopupWindow(routes.signup)}
         >
           Sign Up
         </Button>
