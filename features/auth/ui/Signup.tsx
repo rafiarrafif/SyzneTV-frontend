@@ -2,11 +2,16 @@
 
 import React from "react";
 import EmailInput from "./EmailInput";
-import { Divider, Link } from "@heroui/react";
+import { Button, Divider, Link } from "@heroui/react";
 import { routes } from "@/shared/config/routes";
 import OAuthProviders from "./OAuthProviders";
+import DebugPage from "@/app/debug/DebugPage";
 
-const Signup = () => {
+type Props = {
+  changeCurrentPage: React.Dispatch<React.SetStateAction<React.JSX.Element>>;
+};
+
+const Signup = ({ changeCurrentPage }: Props) => {
   return (
     <div className="pt-12 max-w-[480px] mx-auto">
       <div className="text-3xl text-center">Create an account</div>
@@ -14,6 +19,13 @@ const Signup = () => {
       {/* Email form */}
       <div className="mt-6 px-3">
         <EmailInput />
+        <Button
+          onPress={() => changeCurrentPage(<DebugPage />)}
+          className="mt-2 w-full"
+          color="primary"
+        >
+          For debug only
+        </Button>
       </div>
 
       {/* Sign up link */}
