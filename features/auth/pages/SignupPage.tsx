@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import React, { JSX, useEffect, useState } from "react";
 import SecurityCheckup from "@/shared/auth/ui/SecurityCheckup";
 import SecurityCheckupFailed from "@/shared/auth/ui/SecurityCheckupFailed";
-import Signup from "../ui/Signup";
+import Signup from "../ui/cards/Signup";
 
 const SignupPage = () => {
   // State to set the current page component

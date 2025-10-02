@@ -1,26 +1,30 @@
 "use client";
 
 import React from "react";
-import EmailInput from "./EmailInput";
 import { Divider, Link } from "@heroui/react";
 import { routes } from "@/shared/config/routes";
-import OAuthProviders from "./OAuthProviders";
+import OAuthProviders from "../components/OAuthProviders";
+import FullNameInput from "../components/FullNameInput";
 
-const Login = () => {
+type Props = {
+  changeCurrentPage: React.Dispatch<React.SetStateAction<React.JSX.Element>>;
+};
+
+const Signup = ({ changeCurrentPage }: Props) => {
   return (
     <div className="pt-12 max-w-[480px] mx-auto">
-      <div className="text-3xl text-center">Welcome back</div>
+      <div className="text-3xl text-center">Create an account</div>
 
       {/* Email form */}
       <div className="mt-6 px-3">
-        <EmailInput />
+        <FullNameInput changeCurrentPage={changeCurrentPage} />
       </div>
 
       {/* Sign up link */}
       <p className="text-center text-neutral-300 text-sm font-light mt-5">
-        Don't have an account?{" "}
-        <Link className="text-sm font-medium" href={routes.signup}>
-          Sign Up
+        Already have an account?{" "}
+        <Link className="text-sm font-medium" href={routes.login}>
+          Log in
         </Link>
       </p>
 
@@ -39,4 +43,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;

@@ -2,7 +2,7 @@
 
 import { redirect } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import Login from "@/features/auth/ui/Login";
+import Login from "@/features/auth/ui/cards/Login";
 import SecurityCheckup from "@/shared/auth/ui/SecurityCheckup";
 import SecurityCheckupFailed from "@/shared/auth/ui/SecurityCheckupFailed";
 
