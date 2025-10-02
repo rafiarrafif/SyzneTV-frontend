@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { Button, Input } from "@heroui/react";
-import DebugPage from "@/app/debug/DebugPage";
+import Provision from "../cards/Provision";
 
 type Props = {
   changeCurrentPage: React.Dispatch<React.SetStateAction<React.JSX.Element>>;
@@ -25,7 +25,7 @@ const FullNameInput = ({ changeCurrentPage }: Props) => {
         }}
       />
       <Button
-        onPress={() => changeCurrentPage(<DebugPage />)}
+        onPress={() => changeCurrentPage(<Provision fullName={fullName} />)}
         className="mt-2 w-full"
         color="primary"
       >
