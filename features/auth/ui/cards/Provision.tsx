@@ -14,7 +14,7 @@ const Provision = ({ fullName }: Props) => {
       <p className="text-sm text-center font-light text-neutral-300 mt-2">
         Just a few more steps to join the fun!
       </p>
-      <ProvisionInput />
+      <ProvisionInput fullname={fullName} />
     </div>
   );
 };
