@@ -5,8 +5,8 @@ import { OauthProviders } from "../../types/oauthProvidersList";
 import { ResponseRequestOauthUrl } from "../../types/responseRequestOauthUrl";
 import { Button } from "@heroui/react";
 import { Icon } from "@iconify/react";
-import getOauthProviderList from "../../lib/getOauthProviderList";
-import requestOauthUrl from "../../lib/requestOauthUrl";
+import getOauthProviderList from "../../models/getOauthProviderList";
+import requestOauthUrl from "../../models/requestOauthUrl";
 
 const OAuthProviders = () => {
   // Set initial state for OAuth providers list
