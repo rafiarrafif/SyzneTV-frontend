@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { addToast, Button, Form, Input } from "@heroui/react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { submitRegisterForm } from "../../models/submitRegisterForm";
+import { submitRegisterForm } from "../../lib/submitRegisterForm";
 
 type Props = {
   fullname: string;
