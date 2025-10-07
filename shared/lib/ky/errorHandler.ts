@@ -2,9 +2,15 @@
 
 import { HTTPError } from "ky";
 
+export type CallApiErrorHandler = {
+  success?: boolean;
+  status?: number;
+  text?: { message?: string };
+};
+
 export const apiErrorHandler = async (
   error: unknown,
-  safeFail: boolean = false
+  safeFail?: CallApiErrorHandler
 ) => {
   if (error instanceof HTTPError) {
     return {
@@ -16,9 +22,11 @@ export const apiErrorHandler = async (
 
   if (safeFail) {
     return {
-      success: false,
-      status: 500,
-      text: { message: "An unexpected error occurred" },
+      success: safeFail.success || false,
+      status: safeFail.status || 500,
+      text: {
+        message: safeFail.text?.message || "An unexpected error occurred",
+      },
     };
   } else {
     throw error;

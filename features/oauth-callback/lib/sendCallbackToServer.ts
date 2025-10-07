@@ -1,14 +1,7 @@
 "use server";
 import { api } from "@/shared/lib/ky/connector";
 import { apiErrorHandler } from "@/shared/lib/ky/errorHandler";
-import { HTTPError } from "ky";
-
-interface SendCallbackResponse {
-  success: boolean;
-  status: number;
-  text: { message: string };
-  data?: any;
-}
+import { ServerRequestCallback } from "@/shared/types/serverRequestCallback";
 
 /**
  * @function SendCallbackToServer
@@ -64,7 +57,7 @@ interface SendCallbackResponse {
 export const SendCallbackToServer = async (
   data: string,
   provider: string
-): Promise<SendCallbackResponse> => {
+): Promise<ServerRequestCallback> => {
   // Construct the backend and frontend handler URLs
   const backendHandlerUrl = `auth/${provider}/callback/`;
   const frontendHandlerUrl = `${process.env

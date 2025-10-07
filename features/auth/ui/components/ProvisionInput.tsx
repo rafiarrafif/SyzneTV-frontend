@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Button, Form, Input } from "@heroui/react";
+import { addToast, Button, Form, Input } from "@heroui/react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { submitRegisterForm } from "../../models/submitRegisterForm";
 
@@ -22,9 +22,16 @@ const ProvisionInput = ({ fullname }: Props) => {
 
   const [submitStatus, setSubmitStatus] = useState(false);
   const onSubmit: SubmitHandler<RegisterInputs> = async (data) => {
+    setSubmitStatus(true);
     console.log("Mensubmit");
     const returnData = await submitRegisterForm(data);
     console.log(returnData);
+    addToast({
+      color: "danger",
+      title: "😬 Oops, something went wrong!",
+      description: returnData.text.message,
+    });
+    setSubmitStatus(false);
   };
 
   return (
