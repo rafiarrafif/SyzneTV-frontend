@@ -3,12 +3,13 @@
 import React, { useState } from "react";
 import { Button, Form, Input } from "@heroui/react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { submitRegisterForm } from "../../models/submitRegisterForm";
 
 type Props = {
   fullname: string;
 };
 
-type Inputs = {
+export type RegisterInputs = {
   fullname: string;
   email: string;
   password: string;
@@ -16,13 +17,14 @@ type Inputs = {
 };
 
 const ProvisionInput = ({ fullname }: Props) => {
-  const { register, handleSubmit, setValue } = useForm<Inputs>();
+  const { register, handleSubmit, setValue } = useForm<RegisterInputs>();
   setValue("fullname", fullname);
 
   const [submitStatus, setSubmitStatus] = useState(false);
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
-    setSubmitStatus(true);
-    console.log(data);
+  const onSubmit: SubmitHandler<RegisterInputs> = async (data) => {
+    console.log("Mensubmit");
+    const returnData = await submitRegisterForm(data);
+    console.log(returnData);
   };
 
   return (
