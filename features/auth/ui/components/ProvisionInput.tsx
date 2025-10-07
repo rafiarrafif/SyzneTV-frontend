@@ -23,15 +23,32 @@ const ProvisionInput = ({ fullname }: Props) => {
   const [submitStatus, setSubmitStatus] = useState(false);
   const onSubmit: SubmitHandler<RegisterInputs> = async (data) => {
     setSubmitStatus(true);
-    console.log("Mensubmit");
-    const returnData = await submitRegisterForm(data);
-    console.log(returnData);
-    addToast({
-      color: "danger",
-      title: "😬 Oops, something went wrong!",
-      description: returnData.text.message,
-    });
-    setSubmitStatus(false);
+
+    try {
+      const returnData = await submitRegisterForm(data);
+      if (!returnData.success) {
+        setSubmitStatus(false);
+        addToast({
+          color: "danger",
+          title: "😬 Oops, something went wrong!",
+          description: returnData.text.message,
+        });
+      } else {
+        setSubmitStatus(false);
+        addToast({
+          color: "success",
+          title: "OKKE!",
+          description: returnData.text.message,
+        });
+      }
+    } catch (error) {
+      setSubmitStatus(false);
+      addToast({
+        color: "danger",
+        title: "😬 Oops, something went wrong!",
+        description: "Internal server error",
+      });
+    }
   };
 
   return (

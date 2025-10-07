@@ -2,7 +2,7 @@
 
 import { apiErrorHandler } from "@/shared/lib/ky/errorHandler";
 import { RegisterInputs } from "../ui/components/ProvisionInput";
-import { ServerRequestCallback } from "@/shared/types/serverRequestCallback";
+import { ServerRequestCallback } from "@/shared/types/ServerRequestCallback";
 
 export const submitRegisterForm = async (
   data: RegisterInputs
