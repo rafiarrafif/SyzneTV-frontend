@@ -3,6 +3,7 @@
 import { apiErrorHandler } from "@/shared/lib/ky/errorHandler";
 import { RegisterInputs } from "../ui/components/ProvisionInput";
 import { ServerRequestCallback } from "@/shared/types/ServerRequestCallback";
+import { generateRandomString } from "@/shared/helper/generateRandomString";
 
 export const submitRegisterForm = async (
   data: RegisterInputs
@@ -15,6 +16,17 @@ export const submitRegisterForm = async (
     });
 
   try {
+    console.log({
+      ...data,
+      username:
+        data.fullname
+          .trim()
+          .split(" ")[0]
+          .toLowerCase()
+          .substring(0, 5) +
+        "_" +
+        generateRandomString(10),
+    });
     await new Promise((resolve) => setTimeout(resolve, 3000));
     return {
       success: true,
