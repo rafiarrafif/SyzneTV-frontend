@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import { addToast, Button, Form, Input } from "@heroui/react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { submitRegisterForm } from "../../lib/submitRegisterForm";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { registerFormSchema } from "../../models/registerForm.schema";
 
 type Props = {
   fullname: string;
@@ -17,7 +19,14 @@ export type RegisterInputs = {
 };
 
 const ProvisionInput = ({ fullname }: Props) => {
-  const { register, handleSubmit, setValue } = useForm<RegisterInputs>();
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm<RegisterInputs>({
+    resolver: zodResolver(registerFormSchema),
+  });
   setValue("fullname", fullname);
 
   const [submitStatus, setSubmitStatus] = useState(false);
@@ -46,7 +55,7 @@ const ProvisionInput = ({ fullname }: Props) => {
       addToast({
         color: "danger",
         title: "😬 Oops, something went wrong!",
-        description: "Internal server error",
+        description: "Connection to server lost",
       });
     }
   };
@@ -60,6 +69,8 @@ const ProvisionInput = ({ fullname }: Props) => {
           label="Email"
           type="email"
           variant="bordered"
+          isInvalid={errors.email ? true : false}
+          errorMessage={errors.email?.message}
           classNames={{
             input: "text-md font-light pt-4",
             inputWrapper: "flex gap-10",
@@ -71,6 +82,8 @@ const ProvisionInput = ({ fullname }: Props) => {
           label="Password"
           type="password"
           variant="bordered"
+          isInvalid={errors.password ? true : false}
+          errorMessage={errors.password?.message}
           classNames={{
             input: "text-md font-light pt-4",
             inputWrapper: "flex gap-10",
@@ -82,6 +95,8 @@ const ProvisionInput = ({ fullname }: Props) => {
           label="Confirm Password"
           type="password"
           variant="bordered"
+          isInvalid={errors.confirmPassword ? true : false}
+          errorMessage={errors.confirmPassword?.message}
           classNames={{
             input: "text-md font-light pt-4",
             inputWrapper: "flex gap-10",
