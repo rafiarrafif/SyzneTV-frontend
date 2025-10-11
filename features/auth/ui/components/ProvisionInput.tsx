@@ -6,6 +6,8 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { submitRegisterForm } from "../../lib/submitRegisterForm";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { registerFormSchema } from "../../models/registerForm.schema";
+import { COOKIE_KEYS } from "@/shared/constants/cookie.key";
+import { useRunOnce } from "@/shared/hooks/useRunOnce";
 
 type Props = {
   fullname: string;
@@ -43,7 +45,6 @@ const ProvisionInput = ({ fullname }: Props) => {
           description: returnData.text.message,
         });
       } else {
-        console.log(returnData);
         setSubmitStatus(false);
         addToast({
           color: "success",
