@@ -43,6 +43,7 @@ const ProvisionInput = ({ fullname }: Props) => {
           description: returnData.text.message,
         });
       } else {
+        console.log(returnData);
         setSubmitStatus(false);
         addToast({
           color: "success",

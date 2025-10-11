@@ -4,6 +4,7 @@ import { apiErrorHandler } from "@/shared/lib/ky/errorHandler";
 import { RegisterInputs } from "../ui/components/ProvisionInput";
 import { ServerRequestCallback } from "@/shared/types/ServerRequestCallback";
 import { generateRandomString } from "@/shared/helper/generateRandomString";
+import { api } from "@/shared/lib/ky/connector";
 
 export const submitRegisterForm = async (
   data: RegisterInputs
@@ -16,8 +17,7 @@ export const submitRegisterForm = async (
     });
 
   try {
-    console.log({
-      ...data,
+    const payload = {
       username:
         data.fullname
           .trim()
@@ -26,12 +26,17 @@ export const submitRegisterForm = async (
           .substring(0, 5) +
         "_" +
         generateRandomString(10),
-    });
-    await new Promise((resolve) => setTimeout(resolve, 3000));
+      name: data.fullname,
+      email: data.email,
+      password: data.password,
+    };
+    const callback = await api.post("users", { json: payload }).json();
+
     return {
       success: true,
       status: 200,
       text: { message: "Registration successful" },
+      data: callback,
     };
   } catch (error) {
     return apiErrorHandler(error);
