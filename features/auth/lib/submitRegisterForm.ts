@@ -5,9 +5,9 @@ import { RegisterInputs } from "../ui/components/ProvisionInput";
 import { ServerRequestCallback } from "@/shared/types/ServerRequestCallback";
 import { generateRandomString } from "@/shared/helper/generateRandomString";
 import { CallbackFromBackend } from "../types/callbackFromBackend";
-import { cookies } from "next/headers";
 import { api } from "@/shared/lib/ky/connector";
 import { COOKIE_KEYS } from "@/shared/constants/cookie.key";
+import { setCookie } from "@/shared/helper/cookies/set";
 
 export const submitRegisterForm = async (
   data: RegisterInputs
@@ -37,15 +37,7 @@ export const submitRegisterForm = async (
       .post("users", { json: payload })
       .json()) as CallbackFromBackend<string>;
 
-    (await cookies()).set({
-      name: COOKIE_KEYS["AUTH"],
-      value: callback.data!,
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      path: "/",
-      sameSite: "lax",
-      maxAge: 60 * 60 * 24 * 7,
-    });
+    await setCookie(COOKIE_KEYS.AUTH, callback.data!);
 
     return {
       success: true,
