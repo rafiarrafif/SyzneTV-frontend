@@ -4,7 +4,7 @@ import React from "react";
 import { Divider, Link } from "@heroui/react";
 import { routes } from "@/shared/config/routes";
 import OAuthProviders from "../components/OAuthProviders";
-import FullNameInput from "../components/FullNameInput";
+import ProvisionRegister from "../components/provision/main";
 
 type Props = {
   changeCurrentPage: React.Dispatch<React.SetStateAction<React.JSX.Element>>;
@@ -17,7 +17,7 @@ const Signup = ({ changeCurrentPage }: Props) => {
 
       {/* Email form */}
       <div className="mt-6 px-3">
-        <FullNameInput changeCurrentPage={changeCurrentPage} />
+        <ProvisionRegister />
       </div>
 
       {/* Sign up link */}
