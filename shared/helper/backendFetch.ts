@@ -1,3 +1,4 @@
+"use server";
 export interface BackendResponse<T = unknown> {
   success: boolean;
   message: string;

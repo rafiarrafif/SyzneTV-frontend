@@ -16,18 +16,27 @@ import {
   GetALlThirdPartyAuthCallback,
 } from "../actions/getAllThirdPartyAuth";
 import { Icon } from "@iconify/react";
+import { Spinner } from "@/shared/libs/shadcn/ui/spinner";
+import { getOauthEndpoint } from "../actions/getOauthEndpoint";
+import { useRouter } from "next/navigation";
 
 const SignInCard = () => {
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
   const [oAuthProviders, setOAuthProviders] =
     useState<GetALlThirdPartyAuthCallback | null>(null);
 
   useEffect(() => {
     (async () => {
       const res = await getAllThirdPartyAuth();
-      console.log(res);
       setOAuthProviders(res);
     })();
   }, []);
+
+  const getOauthEndpointUrl = async (providerReqEndpoint: string) => {
+    const res = await getOauthEndpoint(providerReqEndpoint);
+    router.push(res.data?.endpointUrl || "/");
+  };
 
   return (
     <DialogContent showCloseButton={false}>
@@ -56,14 +65,17 @@ const SignInCard = () => {
                   key={index}
                   variant="outline"
                   className="w-full text-neutral-300 text-xs font-normal"
+                  disabled={isLoading}
+                  onClick={() => getOauthEndpointUrl(provider.req_endpoint)}
                 >
+                  {isLoading && <Spinner />}
                   <Icon icon={provider.icon} />
                   Continue with {provider.name}
                 </Button>
               ))}
             </div>
           ) : (
-            <Button size="sm" className="w-full" isDisabled>
+            <Button size="sm" className="w-full" variant="outline" disabled>
               There are no third-party auth providers available.
             </Button>
           )}
@@ -71,9 +83,14 @@ const SignInCard = () => {
       </div>
       <DialogFooter>
         <DialogClose asChild>
-          <Button variant="outline">Cancel</Button>
+          <Button variant="outline" disabled={isLoading}>
+            Cancel
+          </Button>
         </DialogClose>
-        <Button type="submit">Continue</Button>
+        <Button type="submit" disabled={isLoading}>
+          {isLoading && <Spinner />}
+          Continue
+        </Button>
       </DialogFooter>
     </DialogContent>
   );
