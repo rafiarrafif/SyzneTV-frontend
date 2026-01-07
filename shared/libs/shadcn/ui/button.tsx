@@ -33,6 +33,9 @@ const buttonVariants = cva(
           "size-7 rounded-[min(var(--radius-md),12px)] in-data-[slot=button-group]:rounded-lg",
         "icon-lg": "size-9",
       },
+      isDisabled: {
+        true: "bg-neutral-800 text-neutral-400 cursor-not-allowed text-xs",
+      },
     },
     defaultVariants: {
       variant: "default",
@@ -46,10 +49,12 @@ function Button({
   variant = "default",
   size = "default",
   asChild = false,
+  isDisabled = false,
   ...props
 }: React.ComponentProps<"button"> &
   VariantProps<typeof buttonVariants> & {
     asChild?: boolean;
+    isDisabled?: boolean;
   }) {
   const Comp = asChild ? Slot.Root : "button";
 
@@ -58,7 +63,7 @@ function Button({
       data-slot="button"
       data-variant={variant}
       data-size={size}
-      className={cn(buttonVariants({ variant, size, className }))}
+      className={cn(buttonVariants({ variant, size, isDisabled, className }))}
       {...props}
     />
   );
