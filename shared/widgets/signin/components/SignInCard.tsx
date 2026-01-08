@@ -33,8 +33,14 @@ const SignInCard = () => {
     })();
   }, []);
 
-  const getOauthEndpointUrl = async (providerReqEndpoint: string) => {
-    const res = await getOauthEndpoint(providerReqEndpoint);
+  const getOauthEndpointUrl = async (
+    providerReqEndpoint: string,
+    providerName: string
+  ) => {
+    const res = await getOauthEndpoint({
+      endpointUrl: providerReqEndpoint,
+      providerName: providerName,
+    });
     router.push(res.data?.endpointUrl || "/");
   };
 
@@ -66,7 +72,9 @@ const SignInCard = () => {
                   variant="outline"
                   className="w-full text-neutral-300 text-xs font-normal"
                   disabled={isLoading}
-                  onClick={() => getOauthEndpointUrl(provider.req_endpoint)}
+                  onClick={() =>
+                    getOauthEndpointUrl(provider.req_endpoint, provider.name)
+                  }
                 >
                   {isLoading && <Spinner />}
                   <Icon icon={provider.icon} />
