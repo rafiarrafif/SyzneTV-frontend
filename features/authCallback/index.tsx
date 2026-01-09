@@ -1,25 +1,33 @@
 "use client";
 import { Spinner } from "@/shared/libs/shadcn/ui/spinner";
-import { submitProviderCallback } from "@/shared/widgets/signin/actions/submitProviderCallback";
+import { submitProviderCallback } from "@/features/authCallback/actions/submitProviderCallback";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const AuthCallbackIndex = () => {
   const { name } = useParams();
   const queries = useSearchParams().toString();
-  const router = useRouter();
   const [textDescription, setTextDescription] = useState(
     "We are processing your authentication."
   );
+
+  const finishOAuthFlow = (type: string) => {
+    setTimeout(() => {
+      if (!window.opener) window.location.href = "/";
+      window.opener.postMessage({ type: type }, window.location.origin);
+      window.close();
+    }, 1000);
+  };
 
   useEffect(() => {
     (async () => {
       const response = await submitProviderCallback(name as string, queries);
       if (response.success) {
         setTextDescription("Authentication successful! Redirecting...");
-        router.push("/");
+        finishOAuthFlow("oauth-success");
       } else {
         setTextDescription("Authentication failed. Please try again.");
+        finishOAuthFlow("oauth-failed");
       }
     })();
   }, []);

@@ -10,7 +10,7 @@ import {
 import { Input } from "@/shared/libs/shadcn/ui/input";
 import { Label } from "@/shared/libs/shadcn/ui/label";
 import { Separator } from "@/shared/libs/shadcn/ui/separator";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   getAllThirdPartyAuth,
   GetALlThirdPartyAuthCallback,
@@ -18,14 +18,13 @@ import {
 import { Icon } from "@iconify/react";
 import { Spinner } from "@/shared/libs/shadcn/ui/spinner";
 import { getOauthEndpoint } from "../actions/getOauthEndpoint";
-import { useRouter } from "next/navigation";
 
 const SignInCard = () => {
-  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [oAuthProviders, setOAuthProviders] =
     useState<GetALlThirdPartyAuthCallback | null>(null);
 
+  // Fetch available third-party auth providers on component mount
   useEffect(() => {
     (async () => {
       const res = await getAllThirdPartyAuth();
@@ -33,6 +32,7 @@ const SignInCard = () => {
     })();
   }, []);
 
+  // Open OAuth endpoint in a new popup window
   const getOauthEndpointUrl = async (
     providerReqEndpoint: string,
     providerName: string
@@ -41,8 +41,24 @@ const SignInCard = () => {
       endpointUrl: providerReqEndpoint,
       providerName: providerName,
     });
-    router.push(res.data?.endpointUrl || "/");
+
+    setIsLoading(true);
+    window.open(res.data?.endpointUrl, "oauthPopup", "width=500,height=600");
   };
+
+  // Handle the feedback from popup window for OAuth
+  const handleMessage = useCallback((event: MessageEvent) => {
+    if (event.origin !== window.location.origin) return;
+    if (event.data.type === "oauth-success") window.location.reload();
+    if (event.data.type === "oauth-failed") setIsLoading(false);
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("message", handleMessage);
+    return () => {
+      window.removeEventListener("message", handleMessage);
+    };
+  }, [handleMessage]);
 
   return (
     <DialogContent showCloseButton={false}>
