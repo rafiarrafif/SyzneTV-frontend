@@ -2,8 +2,6 @@
 import Image from "next/image";
 import NavigationLink from "./NavigationLink";
 import SignIn from "./SignIn";
-import { Dialog, DialogTrigger } from "@/shared/libs/shadcn/ui/dialog";
-import PopupWrapper from "../../signin/components/PopupWrapper";
 
 const Navbar = () => {
   return (
