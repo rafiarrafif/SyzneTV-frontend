@@ -1,10 +1,17 @@
-import { cookies } from "next/headers";
-import React from "react";
+import {
+  UserSession,
+  validateAndDecodeJWT,
+} from "../models/auth/validateAndDecodeJWT";
+import AuthSessionProvider from "./AuthSession.client";
 
-const AuthSessionProvider = ({children}: readonly<{children: React.ReactNode}>) => {
-  const cookieHeader = cookies().toString();
-  console.log("Cookies in AuthSessionProvider:", cookieHeader);
-  return <AuthContext.Provider value={{ cookie = cookieHeader }}>{children}</AuthContext.Provider>;
+const AuthSessionProviderWrapper = async ({
+  children,
+}: Readonly<{ children: React.ReactNode }>) => {
+  let session: UserSession | null = await validateAndDecodeJWT();
+
+  return (
+    <AuthSessionProvider session={session}>{children}</AuthSessionProvider>
+  );
 };
 
-export default AuthSessionProvider;
+export default AuthSessionProviderWrapper;

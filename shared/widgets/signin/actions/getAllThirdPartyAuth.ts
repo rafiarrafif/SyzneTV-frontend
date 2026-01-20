@@ -1,5 +1,5 @@
 "use server";
-import { backendFetch, BackendResponse } from "@/shared/helper/backendFetch";
+import { backendFetch, BackendResponse } from "@/shared/helpers/backendFetch";
 
 export type GetALlThirdPartyAuthCallback = BackendResponse<
   {

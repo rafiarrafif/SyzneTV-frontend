@@ -1,11 +1,11 @@
 "use server";
 
-import { backendFetch, BackendResponse } from "@/shared/helper/backendFetch";
+import { backendFetch, BackendResponse } from "@/shared/helpers/backendFetch";
 import { cookies } from "next/headers";
 
 export const submitProviderCallback = async (
   providerName: string,
-  queries?: unknown
+  queries?: unknown,
 ): Promise<
   BackendResponse<{
     authToken: string;
@@ -15,7 +15,7 @@ export const submitProviderCallback = async (
     const envKey = providerName.toUpperCase() + "_CALLBACK_URL";
 
     const authClientCallbackUrl = (await backendFetch(
-      "auth/providers/" + providerName + "/callback"
+      "auth/providers/" + providerName + "/callback",
     )) as BackendResponse<{
       callback_url: string;
     }>;
@@ -26,7 +26,7 @@ export const submitProviderCallback = async (
     const responseProvision = (await backendFetch(
       `${authClientCallbackUrl.data?.callback_url!}?callbackURI=${
         process.env.APP_URL
-      }${process.env[envKey]}&${queries}`
+      }${process.env[envKey]}&${queries}`,
     )) as BackendResponse<{
       authToken: string;
     }>;

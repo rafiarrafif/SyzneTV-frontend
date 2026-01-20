@@ -1,5 +1,5 @@
 "use server";
-import { backendFetch, BackendResponse } from "@/shared/helper/backendFetch";
+import { backendFetch, BackendResponse } from "@/shared/helpers/backendFetch";
 
 interface GetOauthEndpointParams {
   endpointUrl: string;
@@ -13,7 +13,7 @@ export const getOauthEndpoint = async ({
   const envKey = providerName.toUpperCase() + "_CALLBACK_URL";
 
   return (await backendFetch(
-    `${endpointUrl}?callback=${process.env.APP_URL}${process.env[envKey]}`
+    `${endpointUrl}?callback=${process.env.APP_URL}${process.env[envKey]}`,
   )) as BackendResponse<{
     endpointUrl: string;
   }>;
