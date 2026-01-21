@@ -29,8 +29,13 @@ export interface UserSession {
   exp: number;
 }
 
-export const validateAndDecodeJWT = async (): Promise<UserSession> => {
+export const validateAndDecodeJWT = async (): Promise<UserSession | null> => {
   const cookieHeader = (await cookies()).get("auth_token")?.value;
+
+  if (!cookieHeader) {
+    return null;
+  }
+
   const res = (await backendFetch("auth/token/validate", {
     method: "POST",
     body: JSON.stringify({
