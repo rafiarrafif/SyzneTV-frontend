@@ -31,7 +31,7 @@ const AuthCallbackIndex = () => {
         finishOAuthFlow("oauth-failed");
       }
     })();
-  }, []);
+  }, [name, queries]);
 
   return (
     <div className="w-full flex flex-col items-center gap-2 pt-8">
