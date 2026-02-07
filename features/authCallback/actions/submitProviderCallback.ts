@@ -24,7 +24,7 @@ export const submitProviderCallback = async (
       throw new Error("Failed to get auth client callback URL");
 
     const responseProvision = (await backendFetch(
-      `${authClientCallbackUrl.data?.callback_url!}?callbackURI=${
+      `${authClientCallbackUrl.data?.callback_url}?callbackURI=${
         process.env.APP_URL
       }${process.env[envKey]}&${queries}`,
     )) as BackendResponse<{
@@ -36,7 +36,7 @@ export const submitProviderCallback = async (
 
     (await cookies()).set({
       name: "auth_token",
-      value: responseProvision.data?.authToken!,
+      value: responseProvision.data?.authToken || "",
       httpOnly: true,
       path: "/",
       secure: process.env.NODE_ENV === "production",

@@ -7,7 +7,7 @@ import AuthSessionProvider from "./AuthSession.client";
 const AuthSessionProviderWrapper = async ({
   children,
 }: Readonly<{ children: React.ReactNode }>) => {
-  let session: UserSession | null = await validateAndDecodeJWT();
+  const session: UserSession | null = await validateAndDecodeJWT();
 
   return (
     <AuthSessionProvider session={session}>{children}</AuthSessionProvider>
