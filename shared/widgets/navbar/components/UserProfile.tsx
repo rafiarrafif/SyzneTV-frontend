@@ -34,7 +34,7 @@ const UserProfile = () => {
             />
           </Avatar>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="end" className="w-38">
+        <DropdownMenuContent align="end" className="w-48">
           <DropdownMenuGroup>
             <DropdownMenuLabel>Account</DropdownMenuLabel>
             <DropdownMenuItem>
@@ -43,11 +43,11 @@ const UserProfile = () => {
             </DropdownMenuItem>
             <DropdownMenuItem>
               <ClockFading />
-              Activity
+              Your Activity
             </DropdownMenuItem>
             <DropdownMenuItem>
               <Bookmark />
-              Bookmark
+              Saved Bookmarks
             </DropdownMenuItem>
             <DropdownMenuItem>
               <Settings />
