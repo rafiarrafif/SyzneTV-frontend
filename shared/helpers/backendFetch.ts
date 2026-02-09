@@ -1,5 +1,6 @@
 "use server";
 import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 import { UAParser } from "ua-parser-js";
 
 export interface BackendResponse<T = unknown> {
@@ -22,22 +23,26 @@ export const backendFetch = async (path: string, options: RequestInit = {}) => {
     ip: userIp,
   };
 
-  const res = await fetch(`${process.env.BACKEND_ENDPOINT}/${path}`, {
-    ...options,
-    headers: {
-      "Content-Type": "application/json",
-      "x-client-info": JSON.stringify(clientInfo),
-      Authorization: `Bearer ${process.env.BACKEND_API_KEY}`,
-      ...options.headers,
-    },
-    cache: "default",
-  });
+  try {
+    const res = await fetch(`${process.env.BACKEND_ENDPOINT}/${path}`, {
+      ...options,
+      headers: {
+        "Content-Type": "application/json",
+        "x-client-info": JSON.stringify(clientInfo),
+        Authorization: `Bearer ${process.env.BACKEND_API_KEY}`,
+        ...options.headers,
+      },
+      cache: "default",
+    });
 
-  const resJson = (await res.json()) as BackendResponse;
+    const resJson = (await res.json()) as BackendResponse;
 
-  if (!res.ok || !resJson.success) {
-    throw new Error(`Elysia error: ${resJson.error}`);
+    if (!res.ok || !resJson.success) {
+      throw new Error(`Elysia error: ${resJson.error}`);
+    }
+
+    return resJson;
+  } catch (error) {
+    redirect("/status?reason=backend-unreachable");
   }
-
-  return resJson;
 };

@@ -35,7 +35,7 @@ const SignInCard = () => {
   // Open OAuth endpoint in a new popup window
   const getOauthEndpointUrl = async (
     providerReqEndpoint: string,
-    providerName: string
+    providerName: string,
   ) => {
     const res = await getOauthEndpoint({
       endpointUrl: providerReqEndpoint,
@@ -70,7 +70,7 @@ const SignInCard = () => {
         </DialogDescription>
       </DialogHeader>
       <div className="py-1">
-        <div className="grid w-full max-w-sm items-center gap-3">
+        <div className="grid w-full items-center gap-3">
           <Label htmlFor="email">Email</Label>
           <Input type="email" id="email" placeholder="e.g. user@example.com" />
         </div>
@@ -81,7 +81,7 @@ const SignInCard = () => {
         </div>
         <div>
           {oAuthProviders ? (
-            <div className="flex flex-col gap-1">
+            <div className="flex flex-col gap-2">
               {oAuthProviders.data?.map((provider, index) => (
                 <Button
                   key={index}
