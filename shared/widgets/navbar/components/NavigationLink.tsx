@@ -15,28 +15,28 @@ const NavigationLink = () => {
     <div className="pl-10">
       <NavigationMenu viewport={false}>
         <NavigationMenuList className="flex-wrap">
-          <NavigationMenuItem>
+          <NavigationMenuItem key={1}>
             <NavigationMenuLink asChild>
               <Link href="/season" className="text-sm">
                 Season
               </Link>
             </NavigationMenuLink>
           </NavigationMenuItem>
-          <NavigationMenuItem>
+          <NavigationMenuItem key={2}>
             <NavigationMenuLink asChild>
               <Link href="/genres" className="text-sm">
                 Genres
               </Link>
             </NavigationMenuLink>
           </NavigationMenuItem>
-          <NavigationMenuItem>
+          <NavigationMenuItem key={3}>
             <NavigationMenuLink asChild>
               <Link href="/trending" className="text-sm">
                 Trending
               </Link>
             </NavigationMenuLink>
           </NavigationMenuItem>
-          <NavigationMenuItem>
+          <NavigationMenuItem key={4}>
             <NavigationMenuTrigger className="font-normal">
               Media
             </NavigationMenuTrigger>
@@ -62,7 +62,7 @@ const NavigationLink = () => {
               </ul>
             </NavigationMenuContent>
           </NavigationMenuItem>
-          <NavigationMenuItem>
+          <NavigationMenuItem key={5}>
             <NavigationMenuTrigger className="font-normal">
               Release
             </NavigationMenuTrigger>
