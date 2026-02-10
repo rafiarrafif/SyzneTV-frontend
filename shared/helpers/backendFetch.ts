@@ -42,7 +42,7 @@ export const backendFetch = async (path: string, options: RequestInit = {}) => {
     }
 
     return resJson;
-  } catch (error) {
+  } catch {
     redirect("/status?reason=backend-unreachable");
   }
 };
