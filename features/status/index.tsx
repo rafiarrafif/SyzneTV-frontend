@@ -18,8 +18,8 @@ const StatusIndex = () => {
             Service is temporarily unavailable
           </h1>
           <p className="text-sm text-neutral-300 mt-2">
-            We're currently experiencing an issue with this service and our team
-            is working to restore it as quickly as possible. You can still
+            We&apos;re currently experiencing an issue with this service and our
+            team is working to restore it as quickly as possible. You can still
             browse other features while we fix the problem. Please check back in
             a few moments. We appreciate your patience.
           </p>
