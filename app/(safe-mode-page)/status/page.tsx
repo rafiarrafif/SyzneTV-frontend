@@ -8,7 +8,7 @@ const page = async () => {
   try {
     const data = await backendFetch("status");
     console.log(data);
-  } catch (_) {
+  } catch {
     isDown = true;
   }
   if (!isDown) redirect("/");
