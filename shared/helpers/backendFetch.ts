@@ -30,6 +30,7 @@ export const backendFetch = async (path: string, options: RequestInit = {}) => {
         "Content-Type": "application/json",
         "x-client-info": JSON.stringify(clientInfo),
         Authorization: `Bearer ${process.env.BACKEND_API_KEY}`,
+        cookie: (await headers()).get("cookie") || "",
         ...options.headers,
       },
       cache: "default",
