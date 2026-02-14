@@ -30,6 +30,7 @@ export const backendFetch = async (path: string, options: RequestInit = {}) => {
         "Content-Type": "application/json",
         "x-client-info": JSON.stringify(clientInfo),
         Authorization: `Bearer ${process.env.BACKEND_API_KEY}`,
+        cookie: (await headers()).get("cookie") || "",
         ...options.headers,
       },
       cache: "default",
@@ -37,7 +38,7 @@ export const backendFetch = async (path: string, options: RequestInit = {}) => {
 
     const resJson = (await res.json()) as BackendResponse;
 
-    if (!res.ok || !resJson.success) {
+    if (!res.ok) {
       throw new Error(`Elysia error: ${resJson.error}`);
     }
 
