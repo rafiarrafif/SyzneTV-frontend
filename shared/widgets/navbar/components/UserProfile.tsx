@@ -9,6 +9,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/shared/libs/shadcn/ui/dropdown-menu";
+import { Button } from "@base-ui/react";
 import {
   Bookmark,
   CircleUserRound,
@@ -19,9 +20,16 @@ import {
   Settings,
   Webhook,
 } from "lucide-react";
+import LogoutAlert from "./LogoutAlert";
+import React from "react";
 
 const UserProfile = () => {
   const { session } = useAuth();
+  const [openState, setOpenState] = React.useState(false);
+  const triggerLogoutPopup = () => {
+    setOpenState(true);
+  };
+
   return (
     <div className="h-full flex items-center">
       <DropdownMenu>
@@ -71,13 +79,18 @@ const UserProfile = () => {
           </DropdownMenuGroup>
           <DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem variant="destructive">
-              <LogOut />
-              Log Out
+            <DropdownMenuItem variant="destructive" asChild>
+              <Button
+                onClick={triggerLogoutPopup}
+                className="w-full hover:cursor-pointer"
+              >
+                <LogOut /> Logout
+              </Button>
             </DropdownMenuItem>
           </DropdownMenuGroup>
         </DropdownMenuContent>
       </DropdownMenu>
+      <LogoutAlert openState={openState} setOpenState={setOpenState} />
     </div>
   );
 };

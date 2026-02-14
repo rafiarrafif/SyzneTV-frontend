@@ -38,7 +38,7 @@ export const backendFetch = async (path: string, options: RequestInit = {}) => {
 
     const resJson = (await res.json()) as BackendResponse;
 
-    if (!res.ok || !resJson.success) {
+    if (!res.ok) {
       throw new Error(`Elysia error: ${resJson.error}`);
     }
 
