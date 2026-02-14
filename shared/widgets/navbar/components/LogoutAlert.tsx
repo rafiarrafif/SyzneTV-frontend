@@ -6,12 +6,11 @@ import {
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
-  AlertDialogMedia,
   AlertDialogTitle,
 } from "@/shared/libs/shadcn/ui/alert-dialog";
 import { Spinner } from "@/shared/libs/shadcn/ui/spinner";
+import { logout } from "@/shared/models/auth/logout";
 import { Button } from "@base-ui/react";
-import { LogOut } from "lucide-react";
 import React from "react";
 
 const LogoutAlert = ({
@@ -22,6 +21,12 @@ const LogoutAlert = ({
   setOpenState: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const [isLoading, setIsLoading] = React.useState(false);
+  const continueLogout = async () => {
+    setIsLoading(true);
+    await logout().then((res) =>
+      res.success ? window.location.reload() : setIsLoading(false),
+    );
+  };
 
   return (
     <AlertDialog open={openState}>
@@ -46,7 +51,7 @@ const LogoutAlert = ({
             <Button
               disabled={isLoading}
               className="w-full hover:cursor-pointer"
-              onClick={() => setIsLoading(true)}
+              onClick={continueLogout}
             >
               {isLoading && <Spinner />}
               Logout
