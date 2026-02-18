@@ -12,6 +12,7 @@ import { Spinner } from "@/shared/libs/shadcn/ui/spinner";
 import { logout } from "@/shared/models/auth/logout";
 import { Button } from "@base-ui/react";
 import React from "react";
+import { toast } from "sonner";
 
 const LogoutAlert = ({
   openState,
@@ -23,9 +24,16 @@ const LogoutAlert = ({
   const [isLoading, setIsLoading] = React.useState(false);
   const continueLogout = async () => {
     setIsLoading(true);
-    await logout().then((res) =>
-      res.success ? window.location.reload() : setIsLoading(false),
-    );
+    const res = await logout();
+    if (!res.success) {
+      setIsLoading(false);
+      toast.error(res.message || "Logout failed", {
+        position: "bottom-right",
+        description:
+          "An error occurred while logging out. Please try again later.",
+        richColors: true,
+      });
+    }
   };
 
   return (
