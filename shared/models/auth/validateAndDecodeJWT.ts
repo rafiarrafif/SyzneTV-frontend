@@ -2,7 +2,6 @@
 
 import { backendFetch, BackendResponse } from "@/shared/helpers/backendFetch";
 import { redirect } from "next/navigation";
-import { cookies } from "next/headers";
 
 export interface UserSession {
   id: string;
