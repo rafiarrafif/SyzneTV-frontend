@@ -47,6 +47,7 @@ export const submitProviderCallback = async (
   } catch (error) {
     return {
       success: false,
+      status: 500,
       message: "Error submitting provider callback",
       error: error,
     };

@@ -5,6 +5,7 @@ import { UAParser } from "ua-parser-js";
 
 export interface BackendResponse<T = unknown> {
   success: boolean;
+  status: number;
   message: string;
   data?: T;
   error?: unknown;
@@ -34,16 +35,11 @@ export const backendFetch = async (path: string, options: RequestInit = {}) => {
         ...options.headers,
       },
       cache: "default",
-    });
+    }).then((response) => response.json());
 
-    const resJson = (await res.json()) as BackendResponse;
-
-    if (!res.ok) {
-      throw new Error(`Elysia error: ${resJson.error}`);
-    }
-
-    return resJson;
-  } catch {
+    return res as BackendResponse;
+  } catch (res) {
+    if (process.env.NODE_ENV === "development") return res;
     redirect("/status?reason=backend-unreachable");
   }
 };
