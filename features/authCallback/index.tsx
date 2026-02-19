@@ -11,10 +11,13 @@ const AuthCallbackIndex = () => {
     "We are processing your authentication.",
   );
 
-  const finishOAuthFlow = (type: string) => {
+  const finishOAuthFlow = (type: string, message?: string) => {
     setTimeout(() => {
       if (!window.opener) window.location.href = "/";
-      window.opener.postMessage({ type: type }, window.location.origin);
+      window.opener.postMessage(
+        { type: type, message: message },
+        window.location.origin,
+      );
       window.close();
     }, 1000);
   };
@@ -24,11 +27,10 @@ const AuthCallbackIndex = () => {
       const response = await submitProviderCallback(name as string, queries);
       if (response.success) {
         setTextDescription("Authentication successful! Redirecting...");
-        finishOAuthFlow("oauth-success");
+        finishOAuthFlow("oauth-success", response.message);
       } else {
-        console.error("Error in authentication callback:", response);
         setTextDescription("Authentication failed. Please try again.");
-        finishOAuthFlow("oauth-failed");
+        finishOAuthFlow("oauth-failed", response.message);
       }
     })();
   }, [name, queries]);

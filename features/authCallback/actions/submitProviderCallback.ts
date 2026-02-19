@@ -32,7 +32,12 @@ export const submitProviderCallback = async (
     }>;
 
     if (!responseProvision.success)
-      throw new Error("Failed to submit provider callback");
+      return {
+        success: false,
+        status: responseProvision.status,
+        message: responseProvision.message,
+        error: responseProvision.error,
+      };
 
     (await cookies()).set({
       name: "auth_token",
@@ -48,7 +53,8 @@ export const submitProviderCallback = async (
     return {
       success: false,
       status: 500,
-      message: "Error submitting provider callback",
+      message:
+        "Connection to authentication service failed. Please try again later.",
       error: error,
     };
   }

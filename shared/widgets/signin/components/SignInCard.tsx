@@ -18,6 +18,7 @@ import {
 import { Icon } from "@iconify/react";
 import { Spinner } from "@/shared/libs/shadcn/ui/spinner";
 import { getOauthEndpoint } from "../actions/getOauthEndpoint";
+import { toast } from "sonner";
 
 const SignInCard = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -49,8 +50,21 @@ const SignInCard = () => {
   // Handle the feedback from popup window for OAuth
   const handleMessage = useCallback((event: MessageEvent) => {
     if (event.origin !== window.location.origin) return;
-    if (event.data.type === "oauth-success") window.location.reload();
-    if (event.data.type === "oauth-failed") setIsLoading(false);
+    if (event.data.type === "oauth-success") {
+      toast.success("Authentication successful! Redirecting...", {
+        description: event.data.message,
+        richColors: true,
+      });
+      window.location.reload();
+    }
+    if (event.data.type === "oauth-failed") {
+      toast.error("Authentication failed.", {
+        description: event.data.message || "Please try again.",
+        duration: 5000,
+        richColors: true,
+      });
+      setIsLoading(false);
+    }
   }, []);
 
   useEffect(() => {
