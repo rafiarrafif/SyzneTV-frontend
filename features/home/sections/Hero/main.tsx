@@ -37,14 +37,27 @@ const dummyData = [
   },
   {
     id: "jo21j189291",
-    isClickable: false,
+    isClickable: true,
     title: "Warning System",
     tags: [],
     description:
       "This is a warning system for anime that contain controversial content. This system is designed to inform viewers about the potential risks of watching certain anime. Viewer discretion is advised. Please watch these anime at your own risk.",
-    buttonContent: "Watch Now",
+    buttonContent: "Learn More",
     buttonLink: "https://www.example.com/boku-no-pico",
     imageUrl: "",
+    startDate: "2024-01-01",
+    endDate: "2024-12-31",
+  },
+  {
+    id: "dwasdasdasd",
+    isClickable: false,
+    title: "",
+    tags: [],
+    description: "",
+    buttonContent: "",
+    buttonLink: "",
+    imageUrl:
+      "https://wallpapers.com/images/featured/cool-boy-anime-y61kpjindsmr277u.jpg",
     startDate: "2024-01-01",
     endDate: "2024-12-31",
   },
@@ -54,15 +67,15 @@ const dummyData = [
 const Hero = () => {
   const router = useRouter();
   return (
-    <div className="h-120 rounded-md overflow-hidden">
+    <div className="h-120 rounded-lg overflow-hidden">
       <Swiper
         spaceBetween={0}
         slidesPerView={1}
         onSlideChange={() => console.log("slide change")}
         onSwiper={(swiper) => console.log(swiper)}
         className="h-full"
-        // autoplay={{ delay: 5000, disableOnInteraction: false }}
-        // modules={[Autoplay, Pagination, Navigation]}
+        autoplay={{ delay: 5000, disableOnInteraction: false }}
+        modules={[Autoplay, Pagination, Navigation]}
       >
         {dummyData.map((slide) =>
           slide.imageUrl ? (
@@ -73,44 +86,41 @@ const Hero = () => {
                 alt={slide.title}
                 className="absolute top-0 left-0 z-0 object-cover w-full h-full opacity-80"
               />
-              <div className="absolute top-0 left-0 z-10 h-full w-full py-14 px-20">
-                <h1 className="text-6xl font-semibold tracking-tight">
-                  {slide.title}
-                </h1>
-                <div className="mt-4 flex gap-1.5">
-                  {slide.tags.map((tag) => (
-                    <Badge
-                      className="bg-neutral-200 text-neutral-800"
-                      key={tag}
+              {slide.title && slide.description && (
+                <div
+                  className="absolute top-0 left-0 z-10 h-full w-full py-16 px-20"
+                  style={{
+                    background:
+                      "linear-gradient(90deg,rgba(0, 0, 0, 0.64) 0%, rgba(0, 0, 0, 0.42) 46%, rgba(0, 0, 0, 0) 100%)",
+                  }}
+                >
+                  <h1 className="text-6xl font-semibold tracking-tight">
+                    {slide.title}
+                  </h1>
+                  <div className="mt-4 flex gap-1.5">
+                    {slide.tags.map((tag) => (
+                      <Badge
+                        className="bg-neutral-200 text-neutral-800"
+                        key={tag}
+                      >
+                        {tag}
+                      </Badge>
+                    ))}
+                  </div>
+                  <p className="mt-4 font-medium text-base max-w-[40vw] line-clamp-6">
+                    {slide.description}
+                  </p>
+                  {slide.isClickable && (
+                    <Button
+                      size="lg"
+                      onClick={() => router.push(slide.buttonLink)}
+                      className="mt-6"
                     >
-                      {tag}
-                    </Badge>
-                  ))}
+                      {slide.buttonContent}
+                    </Button>
+                  )}
                 </div>
-                <p className="mt-4 font-medium text-base max-w-[40vw]">
-                  Twelve years ago, a colossal demon fox terrorized the world.
-                  During the monster's attack on the Hidden Leaf Village, the
-                  Hokage—the village's leader and most powerful ninja—sacrifices
-                  himself to seal the beast inside a newborn, relieving
-                  civilization from destruction while dooming the baby to a
-                  lonely life. Now, after years of being shunned and bullied,
-                  Naruto Uzumaki pesters the village with elaborate pranks and
-                  vandalism. Despite these antics, he works hard to achieve his
-                  dream: to become the Hokage and earn the acknowledgement of
-                  those who have mistreated him for his entire life. Naruto
-                  joins Team 7, a ninja squad made up of two of his
-                  peers—prodigy Sasuke Uchiha and clever Sakura Haruno.
-                </p>
-                {slide.isClickable && (
-                  <Button
-                    size="lg"
-                    onClick={() => router.push(slide.buttonLink)}
-                    className="mt-6"
-                  >
-                    {slide.buttonContent}
-                  </Button>
-                )}
-              </div>
+              )}
             </SwiperSlide>
           ) : (
             // Fallback for slides without image
@@ -129,18 +139,7 @@ const Hero = () => {
                 ))}
               </div>
               <p className="mt-4 font-medium text-base max-w-[40vw] mx-auto">
-                Twelve years ago, a colossal demon fox terrorized the world.
-                During the monster's attack on the Hidden Leaf Village, the
-                Hokage—the village's leader and most powerful ninja—sacrifices
-                himself to seal the beast inside a newborn, relieving
-                civilization from destruction while dooming the baby to a lonely
-                life. Now, after years of being shunned and bullied, Naruto
-                Uzumaki pesters the village with elaborate pranks and vandalism.
-                Despite these antics, he works hard to achieve his dream: to
-                become the Hokage and earn the acknowledgement of those who have
-                mistreated him for his entire life. Naruto joins Team 7, a ninja
-                squad made up of two of his peers—prodigy Sasuke Uchiha and
-                clever Sakura Haruno.
+                {slide.description}
               </p>
               {slide.isClickable && (
                 <Button
