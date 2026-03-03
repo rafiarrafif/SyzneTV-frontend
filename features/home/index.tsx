@@ -1,7 +1,11 @@
-"use client";
+import Hero from "./sections/Hero/wrapper";
 
 const HomeIndex = () => {
-  return <div className="text-center w-full">HomePage</div>;
+  return (
+    <div className="w-full pt-4">
+      <Hero />
+    </div>
+  );
 };
 
 export default HomeIndex;
