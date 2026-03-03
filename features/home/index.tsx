@@ -1,6 +1,4 @@
-"use client";
-
-import Hero from "./sections/Hero/main";
+import Hero from "./sections/Hero/wrapper";
 
 const HomeIndex = () => {
   return (
