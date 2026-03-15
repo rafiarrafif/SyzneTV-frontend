@@ -3,7 +3,7 @@ import React from "react";
 
 const layout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
   return (
-    <div className="max-w-400 mx-auto relative">
+    <div className="max-w-396 mx-auto relative">
       <Navbar />
       <div className="pt-16">{children}</div>
     </div>

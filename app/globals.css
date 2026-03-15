@@ -146,3 +146,54 @@
   border-radius: 9px;
   border: 3px none #000000;
 }
+
+@keyframes aircraft-strobe {
+  /* Kedipan 1: Agak lambat/lama */
+  0%,
+  20% {
+    opacity: 1;
+  }
+
+  /* Jeda singkat */
+  35% {
+    opacity: 0;
+  }
+
+  /* Kedipan 2: Cepat */
+  40% {
+    opacity: 1;
+  }
+  43% {
+    opacity: 0;
+  }
+
+  /* Jeda sangat singkat */
+  48% {
+    opacity: 0;
+  }
+
+  /* Kedipan 3: Cepat */
+  53% {
+    opacity: 1;
+  }
+  56% {
+    opacity: 0;
+  }
+
+  /* Jeda panjang sebelum mengulang loop (gelap) */
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Class untuk diterapkan ke elemen */
+.blink-strobe {
+  animation: aircraft-strobe 2s linear infinite;
+}
+
+.hide-scrollbar {
+  scrollbar-width: none; /* Firefox */
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Edge, Safari */
+}

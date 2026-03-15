@@ -121,7 +121,8 @@ export const getRecommendationAnimeAction = async (): Promise<
       thumbnail_url: "https://myanimelist.net/images/anime/1046/122722.jpg",
     },
     {
-      title: "Mobile Suit Gundam: The Origin",
+      title:
+        "Mobile Suit Gundam: The Origin (lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua)",
       rating: 8.42,
       type: "OVA",
       status: "finished",
