@@ -1,16 +1,21 @@
 import { Button } from "@/shared/libs/shadcn/ui/button";
 import { ButtonGroup } from "@/shared/libs/shadcn/ui/button-group";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import React from "react";
 
-const ScrollingButton = () => {
+const ScrollingButton = ({
+  scrollLeft,
+  scrollRight,
+}: {
+  scrollLeft: () => void;
+  scrollRight: () => void;
+}) => {
   return (
     <div>
       <ButtonGroup>
-        <Button variant="outline">
+        <Button variant="outline" onClick={scrollLeft}>
           <ArrowLeft />
         </Button>
-        <Button variant="outline">
+        <Button variant="outline" onClick={scrollRight}>
           <ArrowRight />
         </Button>
       </ButtonGroup>

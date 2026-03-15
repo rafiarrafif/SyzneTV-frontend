@@ -13,7 +13,7 @@ export type RecommendationAnime = {
 export const getRecommendationAnimeAction = async (): Promise<
   RecommendationAnime[]
 > => {
-  //   await new Promise((resolve) => setTimeout(resolve, 2000));
+  await new Promise((resolve) => setTimeout(resolve, 2000));
 
   return [
     {
