@@ -1,9 +1,11 @@
 import Hero from "./sections/Hero/wrapper";
+import Recommendation from "./sections/Recommendation/wrapper";
 
 const HomeIndex = () => {
   return (
-    <div className="w-full pt-4">
+    <div className="w-full pt-4 pb-12">
       <Hero />
+      <Recommendation />
     </div>
   );
 };
