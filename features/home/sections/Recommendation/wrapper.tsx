@@ -1,7 +1,6 @@
 import { Suspense } from "react";
 import RecommendationMain from "./main";
 import RecommendationSkeleton from "./skeleton";
-import ScrollingButton from "./components/ScrollingButton";
 
 const Recommendation = async () => {
   return (

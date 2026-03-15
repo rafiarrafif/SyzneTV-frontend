@@ -4,7 +4,6 @@ import { useRef } from "react";
 import { RecommendationAnime } from "../../actions/getRecommenationAnime";
 import AnimeRecommendationCard from "./components/Card";
 import ScrollingButton from "./components/ScrollingButton";
-import { Skeleton } from "@/shared/libs/shadcn/ui/skeleton";
 
 const RecommendationClient = ({
   result,
