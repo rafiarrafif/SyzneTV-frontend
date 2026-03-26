@@ -6,6 +6,7 @@ import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Icon } from "@iconify/react";
 import Link from "next/link";
+import { useAuth } from "@/shared/contexts/AuthContext";
 
 export interface HeroSwiperProps {
   data: {
@@ -22,6 +23,7 @@ export interface HeroSwiperProps {
 }
 
 const HeroSwiper = (props: HeroSwiperProps) => {
+  const { session } = useAuth();
   return (
     <div className="h-full rounded-lg overflow-hidden">
       <Swiper
@@ -62,14 +64,14 @@ const HeroSwiper = (props: HeroSwiperProps) => {
               <p className="mt-4 font-medium text-base max-w-[40vw] line-clamp-6">
                 {slide.synopsis}
               </p>
-              <div className="flex mt-6">
+              <div className="flex gap-2 mt-6 h-12">
                 <Link
                   href={`/media/${slide.slug}`}
-                  className="w-fit h-fit rounded-xl overflow-hidden"
+                  className="w-fit h-full rounded-xl overflow-hidden"
                 >
                   <Button
                     size="lg"
-                    className=" h-12 flex gap-2 px-4 hover:bg-neutral-950 group"
+                    className="h-full flex gap-2 px-4 hover:bg-neutral-950 group"
                   >
                     <div className="bg-neutral-950 p-2 rounded-full group-hover:bg-primary">
                       <Icon
@@ -82,6 +84,15 @@ const HeroSwiper = (props: HeroSwiperProps) => {
                     </span>
                   </Button>
                 </Link>
+                {session?.user && (
+                  <Button
+                    variant="secondary"
+                    className="h-full flex gap-2 px-4 rounded-xl border border-neutral-400/10 bg-neutral-950/20 hover:bg-neutral-950/40 backdrop-blur-lg text-neutral-200"
+                  >
+                    <Icon icon="boxicons:bookmark" className="size-6" />
+                    <span>Add to List</span>
+                  </Button>
+                )}
               </div>
             </div>
           </SwiperSlide>
