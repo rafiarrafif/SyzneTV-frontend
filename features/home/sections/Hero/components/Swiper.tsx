@@ -34,8 +34,8 @@ const HeroSwiper = (props: HeroSwiperProps) => {
         autoplay={{ delay: 5000, disableOnInteraction: false }}
         modules={[Autoplay, Pagination, Navigation]}
       >
-        {props.data.map((slide) => (
-          <SwiperSlide key={slide.id} className="relative overflow-hidden">
+        {props.data.map((slide, index) => (
+          <SwiperSlide key={index} className="relative overflow-hidden">
             <img
               src={slide.imageUrl}
               alt={slide.title}
