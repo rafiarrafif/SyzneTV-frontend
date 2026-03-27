@@ -6,7 +6,7 @@ import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Icon } from "@iconify/react";
 import Link from "next/link";
-import { useAuth } from "@/shared/contexts/AuthContext";
+import AddToList from "./AddToList";
 
 export interface HeroSwiperProps {
   data: {
@@ -23,7 +23,6 @@ export interface HeroSwiperProps {
 }
 
 const HeroSwiper = (props: HeroSwiperProps) => {
-  const { session } = useAuth();
   return (
     <div className="h-full rounded-lg overflow-hidden">
       <Swiper
@@ -84,15 +83,7 @@ const HeroSwiper = (props: HeroSwiperProps) => {
                     </span>
                   </Button>
                 </Link>
-                {session?.user && (
-                  <Button
-                    variant="secondary"
-                    className="h-full flex gap-2 px-4 rounded-xl border border-neutral-400/10 bg-neutral-950/20 hover:bg-neutral-950/40 backdrop-blur-lg text-neutral-200"
-                  >
-                    <Icon icon="boxicons:bookmark" className="size-6" />
-                    <span>Add to List</span>
-                  </Button>
-                )}
+                <AddToList mediaId={slide.id} />
               </div>
             </div>
           </SwiperSlide>
