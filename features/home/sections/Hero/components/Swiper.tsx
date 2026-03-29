@@ -28,8 +28,6 @@ const HeroSwiper = (props: HeroSwiperProps) => {
       <Swiper
         spaceBetween={0}
         slidesPerView={1}
-        onSlideChange={() => console.log("slide change")}
-        onSwiper={(swiper) => console.log(swiper)}
         className="h-full"
         autoplay={{ delay: 5000, disableOnInteraction: false }}
         modules={[Autoplay, Pagination, Navigation]}
