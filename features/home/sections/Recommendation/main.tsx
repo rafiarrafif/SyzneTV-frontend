@@ -1,4 +1,4 @@
-import { getRecommendationAnimeAction } from "../../actions/getRecommenationAnime";
+import { getRecommendationAnimeAction } from "../../actions/Hero/getRecommenationAnime";
 import RecommendationClient from "./main.client";
 
 const RecommendationMain = async () => {

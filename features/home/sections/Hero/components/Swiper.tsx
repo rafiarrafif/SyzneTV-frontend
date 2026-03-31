@@ -2,114 +2,94 @@
 import "swiper/css";
 import { Badge } from "@/shared/libs/shadcn/ui/badge";
 import { Button } from "@/shared/libs/shadcn/ui/button";
-import { useRouter } from "next/navigation";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Icon } from "@iconify/react";
+import Link from "next/link";
+import AddToList from "./AddToList";
 
 export interface HeroSwiperProps {
   data: {
     id: string;
-    isClickable: boolean;
     title: string;
-    tags: string[];
-    description: string;
-    buttonContent: string;
-    buttonLink: string;
+    slug: string;
     imageUrl: string;
-    startDate: string;
-    endDate: string;
+    synopsis: string;
+    genres: {
+      slug: string;
+      name: string;
+    }[];
+    isInCollection: boolean;
   }[];
 }
 
 const HeroSwiper = (props: HeroSwiperProps) => {
-  const router = useRouter();
   return (
     <div className="h-full rounded-lg overflow-hidden">
       <Swiper
         spaceBetween={0}
         slidesPerView={1}
-        onSlideChange={() => console.log("slide change")}
-        onSwiper={(swiper) => console.log(swiper)}
         className="h-full"
         autoplay={{ delay: 5000, disableOnInteraction: false }}
         modules={[Autoplay, Pagination, Navigation]}
       >
-        {props.data.map((slide) =>
-          slide.imageUrl ? (
-            // Slide with image background
-            <SwiperSlide key={slide.id} className="relative overflow-hidden">
-              <img
-                src={slide.imageUrl}
-                alt={slide.title}
-                className="absolute top-0 left-0 z-0 object-cover w-full h-full opacity-80"
-              />
-              {slide.title && slide.description && (
-                <div
-                  className="absolute top-0 left-0 z-10 h-full w-full py-16 px-20"
-                  style={{
-                    background:
-                      "linear-gradient(90deg,rgba(0, 0, 0, 0.64) 0%, rgba(0, 0, 0, 0.42) 46%, rgba(0, 0, 0, 0) 100%)",
-                  }}
-                >
-                  <h1 className="text-6xl font-semibold tracking-tight">
-                    {slide.title}
-                  </h1>
-                  <div className="mt-4 flex gap-1.5">
-                    {slide.tags.map((tag) => (
-                      <Badge
-                        className="bg-neutral-200 text-neutral-800"
-                        key={tag}
-                      >
-                        {tag}
-                      </Badge>
-                    ))}
-                  </div>
-                  <p className="mt-4 font-medium text-base max-w-[40vw] line-clamp-6">
-                    {slide.description}
-                  </p>
-                  {slide.isClickable && (
-                    <Button
-                      size="lg"
-                      onClick={() => router.push(slide.buttonLink)}
-                      className="mt-6"
-                    >
-                      {slide.buttonContent}
-                    </Button>
-                  )}
-                </div>
-              )}
-            </SwiperSlide>
-          ) : (
-            // Fallback for slides without image
-            <SwiperSlide
-              key={slide.id}
-              className="relative overflow-hidden bg-neutral-800 flex flex-col items-center text-center pt-18"
+        {props.data.map((slide, index) => (
+          <SwiperSlide key={index} className="relative overflow-hidden">
+            <img
+              src={slide.imageUrl}
+              alt={slide.title}
+              className="absolute top-0 left-0 z-0 object-cover w-full h-full opacity-80"
+            />
+            <div
+              className="absolute top-0 left-0 z-10 h-full w-full py-16 px-20"
+              style={{
+                background:
+                  "linear-gradient(90deg,rgba(0, 0, 0, 0.64) 0%, rgba(0, 0, 0, 0.42) 46%, rgba(0, 0, 0, 0) 100%)",
+              }}
             >
               <h1 className="text-6xl font-semibold tracking-tight">
                 {slide.title}
               </h1>
-              <div className="mt-4 flex justify-center gap-1.5">
-                {slide.tags.map((tag) => (
-                  <Badge className="bg-neutral-200 text-neutral-800" key={tag}>
-                    {tag}
-                  </Badge>
+              <div className="mt-4 flex gap-1.5">
+                {slide.genres.map((genre) => (
+                  <Link href={`/genres/${genre.slug}`} key={genre.slug}>
+                    <Badge className="bg-neutral-100/60 backdrop-blur-lg text-neutral-800">
+                      {genre.name}
+                    </Badge>
+                  </Link>
                 ))}
               </div>
-              <p className="mt-4 font-medium text-base max-w-[40vw] mx-auto">
-                {slide.description}
+              <p className="mt-4 font-medium text-base max-w-[40vw] line-clamp-6">
+                {slide.synopsis}
               </p>
-              {slide.isClickable && (
-                <Button
-                  size="lg"
-                  onClick={() => router.push(slide.buttonLink)}
-                  className="mt-6"
+              <div className="flex gap-2 mt-6 h-12">
+                <Link
+                  href={`/media/${slide.slug}`}
+                  className="w-fit h-full rounded-xl overflow-hidden"
                 >
-                  {slide.buttonContent}
-                </Button>
-              )}
-            </SwiperSlide>
-          ),
-        )}
+                  <Button
+                    size="lg"
+                    className="h-full flex gap-2 px-4 hover:bg-neutral-950 group"
+                  >
+                    <div className="bg-neutral-950 p-2 rounded-full group-hover:bg-primary">
+                      <Icon
+                        icon="solar:play-bold"
+                        className="text-primary group-hover:text-neutral-950"
+                      />
+                    </div>
+                    <span className="font-semibold text-neutral-950 group-hover:text-primary">
+                      Watch Now
+                    </span>
+                  </Button>
+                </Link>
+                <AddToList
+                  mediaId={slide.id}
+                  isInCollection={slide.isInCollection}
+                />
+              </div>
+            </div>
+          </SwiperSlide>
+        ))}
       </Swiper>
     </div>
   );

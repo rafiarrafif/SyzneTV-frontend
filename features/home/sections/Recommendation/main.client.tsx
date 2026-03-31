@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { RecommendationAnime } from "../../actions/getRecommenationAnime";
+import { RecommendationAnime } from "../../actions/Hero/getRecommenationAnime";
 import AnimeRecommendationCard from "./components/Card";
 import ScrollingButton from "./components/ScrollingButton";
 
