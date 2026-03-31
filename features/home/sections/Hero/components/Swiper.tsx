@@ -19,6 +19,7 @@ export interface HeroSwiperProps {
       slug: string;
       name: string;
     }[];
+    isInCollection: boolean;
   }[];
 }
 
@@ -81,7 +82,10 @@ const HeroSwiper = (props: HeroSwiperProps) => {
                     </span>
                   </Button>
                 </Link>
-                <AddToList mediaId={slide.id} />
+                <AddToList
+                  mediaId={slide.id}
+                  isInCollection={slide.isInCollection}
+                />
               </div>
             </div>
           </SwiperSlide>

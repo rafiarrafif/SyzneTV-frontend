@@ -1,4 +1,4 @@
-import { RecommendationAnime } from "@/features/home/actions/getRecommenationAnime";
+import { RecommendationAnime } from "@/features/home/actions/Hero/getRecommenationAnime";
 import { Icon } from "@iconify/react";
 
 const AnimeRecommendationCard = ({ data }: { data: RecommendationAnime }) => {
